@@ -61,7 +61,7 @@ const Hero = () => {
                     alt="Hero Image"
                     width={600}
                     height={300}
-                    className="w-full h-full object-fit"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </article>
@@ -76,7 +76,7 @@ const Hero = () => {
                   alt="Hero Image"
                   width={600}
                   height={300}
-                  className="w-full h-auto object-fit"
+                  className="w-full h-54 object-cover"
                 />
                 <div className="px-4 pb-5">
                   <h2 className="font-extrabold text-xl mb-1">
