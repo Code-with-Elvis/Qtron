@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import Hero from "@/components/home/Hero";
 
-const page = () => {
+const HomePage = () => {
   return (
     <section>
-      <div className="qtron-container">Hello</div>
+      <Hero />
     </section>
   );
 };
-export default page;
+export default HomePage;
