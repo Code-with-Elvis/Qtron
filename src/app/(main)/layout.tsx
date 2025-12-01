@@ -12,7 +12,7 @@ export default function MainLayout({
       <Header />
       <SearchForm3 />
       <HeaderBottom />
-      {children}
+      <main className="min-h-[calc(100vh-96px)]">{children}</main>
     </>
   );
 }
