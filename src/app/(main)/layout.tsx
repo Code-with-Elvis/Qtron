@@ -1,3 +1,4 @@
+import HeaderBottom from "@/components/header-bottom/HeaderBottom";
 import Header from "@/components/header/Header";
 
 export default function MainLayout({
@@ -8,6 +9,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
+      <HeaderBottom />
       {children}
     </>
   );
