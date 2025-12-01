@@ -1,5 +1,6 @@
 import HeaderBottom from "@/components/header-bottom/HeaderBottom";
 import Header from "@/components/header/Header";
+import SearchForm3 from "@/components/header/SearchForm3";
 
 export default function MainLayout({
   children,
@@ -9,6 +10,7 @@ export default function MainLayout({
   return (
     <>
       <Header />
+      <SearchForm3 />
       <HeaderBottom />
       {children}
     </>
