@@ -311,3 +311,52 @@ export const themes = [
     preview: "oklch(0.75 0.2 70)",
   },
 ];
+
+export const homeShortCutCategories = [
+  {
+    name: "Elevate Your Sound",
+    products: [
+      {
+        id: 1,
+        name: "Headphones",
+        image: "/Headphones.png",
+      },
+      {
+        id: 2,
+        name: "Speakers",
+        image: "/Speakers.png",
+      },
+      { id: 3, name: "Soundbars", image: "/Soundbars.png" },
+      {
+        id: 4,
+        name: "Microphones",
+        image: "/Microphones.png",
+      },
+    ],
+  },
+  {
+    name: "Save on deals",
+    products: [
+      {
+        id: 5,
+        name: "Gaming",
+        image: "/Gaming.png",
+      },
+      {
+        id: 6,
+        name: "Chargers",
+        image: "/Chargers.png",
+      },
+      {
+        id: 7,
+        name: "Tablets",
+        image: "/Tablets.png",
+      },
+      {
+        id: 8,
+        name: "Adapters",
+        image: "/Adapters.png",
+      },
+    ],
+  },
+];
