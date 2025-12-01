@@ -5,7 +5,7 @@ import Link from "next/link";
 const ShortcutCategories = () => {
   return (
     <div className="qtron-container grid grid-cols-1 sm:grid-cols-2 gap-5 pb-5">
-      <article className="bg-white p-4 ">
+      <article className="category-card p-4">
         <h2 className="mb-2 text-lg font-bold">
           {homeShortCutCategories[0].name}
         </h2>
@@ -24,7 +24,7 @@ const ShortcutCategories = () => {
           ))}
         </div>
       </article>
-      <article className="bg-white p-4 ">
+      <article className="category-card p-4">
         <h2 className="mb-2 text-lg font-bold">
           {homeShortCutCategories[1].name}
         </h2>
