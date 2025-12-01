@@ -13,7 +13,7 @@ import UserButton from "./UserButton";
 const Header = () => {
   return (
     <header>
-      <div className="qtron-container h-16 flex items-center justify-between md:justify-start gap-1">
+      <div className="qtron-container h-15 flex items-center justify-between md:justify-start gap-1">
         <div className="flex items-center gap-1">
           <CategoriesBtn />
           <Link
