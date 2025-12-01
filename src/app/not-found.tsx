@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { RiHome5Line, RiSearchLine } from "react-icons/ri";
-import { BiCategoryAlt } from "react-icons/bi";
 
 function NotFound() {
   return (
@@ -38,7 +37,7 @@ function NotFound() {
             </div>
           </div>
 
-          {/* --- Error Message --- */}
+          {/* ---- Error Message ---- */}
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Connection Lost
           </h2>
@@ -69,39 +68,6 @@ function NotFound() {
                 Search Products
               </Link>
             </Button>
-          </div>
-
-          {/* ---- Quick Links ---- */}
-          <div className="border-t border-border pt-8">
-            <h3 className="text-sm font-semibold text-muted-foreground mb-4">
-              POPULAR CATEGORIES
-            </h3>
-            <div className="flex flex-wrap gap-2 justify-center">
-              <Button asChild variant="secondary" size="sm">
-                <Link href="/category/mobile-phones-tablets">
-                  <BiCategoryAlt className="size-4 mr-1" />
-                  Mobile Phones
-                </Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <Link href="/category/computers-laptops">
-                  <BiCategoryAlt className="size-4 mr-1" />
-                  Laptops
-                </Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <Link href="/category/gaming">
-                  <BiCategoryAlt className="size-4 mr-1" />
-                  Gaming
-                </Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <Link href="/category/audio-sound">
-                  <BiCategoryAlt className="size-4 mr-1" />
-                  Audio
-                </Link>
-              </Button>
-            </div>
           </div>
 
           {/* ---- Error Code ---- */}
