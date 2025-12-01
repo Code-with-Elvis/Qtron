@@ -360,3 +360,103 @@ export const homeShortCutCategories = [
     ],
   },
 ];
+
+export const footerLinks = [
+  {
+    title: "About Qtron",
+    content: [
+      {
+        label: "About Us",
+        href: "#",
+      },
+      {
+        label: "Careers",
+        href: "#",
+      },
+      {
+        label: "Locations",
+        href: "#",
+      },
+      {
+        label: "Blog",
+        href: "#",
+      },
+      {
+        label: "Customer Reviews",
+        href: "#",
+      },
+    ],
+  },
+  {
+    title: "Make Money with Us",
+    content: [
+      {
+        label: "Sell on Qtron",
+        href: "#",
+      },
+      {
+        label: "Affiliate Program",
+        href: "#",
+      },
+      {
+        label: "Advertise Your Products",
+        href: "#",
+      },
+      {
+        label: "Participate in Research",
+        href: "#",
+      },
+    ],
+  },
+  {
+    title: "Customer Service",
+    content: [
+      {
+        label: "Contact Us",
+        href: "#",
+      },
+      {
+        label: "Order Tracking",
+        href: "#",
+      },
+      {
+        label: "Returns",
+        href: "#",
+      },
+      {
+        label: "Shipping",
+        href: "#",
+      },
+      {
+        label: "FAQs",
+        href: "#",
+      },
+    ],
+  },
+
+  {
+    title: "Extra Information",
+    content: [
+      {
+        label: "Privacy Policy",
+        href: "#",
+      },
+      {
+        label: "Terms of Service",
+        href: "#",
+      },
+      {
+        label: "Cookie Policy",
+        href: "#",
+      },
+      {
+        label: "Payment Methods",
+        href: "#",
+      },
+      {
+        label: "Sitemap",
+        href: "#",
+      },
+    ],
+  },
+];
