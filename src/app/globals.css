@@ -95,6 +95,13 @@
 
   --card: oklch(0.18 0.02 130);
   --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.18 0.02 130);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.25 0.05 135);
+  --input: oklch(0.25 0.05 135);
+  --ring: oklch(0.75 0.2 135);
 }
 
 .theme-qtron {
@@ -115,6 +122,13 @@
 
   --card: oklch(0.18 0.03 270);
   --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.18 0.03 270);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.3 0.05 260);
+  --input: oklch(0.3 0.05 260);
+  --ring: oklch(0.6 0.15 260);
 }
 
 .theme-carbon {
@@ -135,6 +149,13 @@
 
   --card: oklch(0.18 0 0);
   --card-foreground: oklch(0.98 0 0);
+
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.35 0.05 200);
+  --input: oklch(0.35 0.05 200);
+  --ring: oklch(0.78 0.18 200);
 }
 
 .theme-hyper {
@@ -155,6 +176,13 @@
 
   --card: oklch(0.96 0.03 210);
   --card-foreground: oklch(0.22 0.01 210);
+
+  --popover: oklch(0.96 0.03 210);
+  --popover-foreground: oklch(0.22 0.01 210);
+
+  --border: oklch(0.85 0.04 210);
+  --input: oklch(0.85 0.04 210);
+  --ring: oklch(0.68 0.17 210);
 }
 
 .theme-solarcore {
@@ -175,6 +203,13 @@
 
   --card: oklch(0.98 0.02 70);
   --card-foreground: oklch(0.18 0.02 70);
+
+  --popover: oklch(0.98 0.02 70);
+  --popover-foreground: oklch(0.18 0.02 70);
+
+  --border: oklch(0.9 0.05 70);
+  --input: oklch(0.9 0.05 70);
+  --ring: oklch(0.75 0.2 70);
 }
 
 @layer base {
@@ -186,5 +221,8 @@
   }
   .qtron-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  button {
+    @apply cursor-pointer;
   }
 }
