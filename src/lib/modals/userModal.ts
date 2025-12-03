@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
@@ -106,6 +107,14 @@ const userSchema = new mongoose.Schema(
 userSchema.index({ email: 1 });
 userSchema.index({ role: 1 });
 userSchema.index({ createdAt: -1 });
+
+// == Hash password before saving to database ==
+
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+
+  this.password = await bcrypt.hash(this.password, 12);
+});
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 

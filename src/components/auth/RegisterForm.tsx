@@ -17,8 +17,26 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "sonner";
 
 const RegisterForm = () => {
+  const [isPending, setIsPending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
   const {
     register,
     handleSubmit,
@@ -27,11 +45,25 @@ const RegisterForm = () => {
     resolver: zodResolver(userRegisterSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof userRegisterSchema>) => {
-    console.log(data);
-  };
+  const onSubmit = async (data: z.infer<typeof userRegisterSchema>) => {
+    try {
+      setIsPending(true);
+      const response = await axios.post("/api/auth/signup", data);
 
-  const isPending = false;
+      if (response.status === 201) {
+        router.push("/signin");
+        toast.success("Account created successfully! Please sign in.");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        setErrorMessage(error.response.data.error || "Something went wrong");
+      } else {
+        setErrorMessage("Network error. Please try again.");
+      }
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-[400px]">
@@ -41,6 +73,12 @@ const RegisterForm = () => {
           <CardDescription>Create a new account</CardDescription>
         </CardHeader>
         <CardContent>
+          {errorMessage && (
+            <p className="text-sm mb-2 p-2 text-center text-red-600 bg-red-100 border border-red-400 rounded">
+              {errorMessage}
+            </p>
+          )}
+
           {/* -- Full name -- */}
           <div className="mb-2">
             <Label htmlFor="fullName" className="text-sm ml-1 mb-1">
