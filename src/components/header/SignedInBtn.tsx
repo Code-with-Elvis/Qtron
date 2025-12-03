@@ -51,10 +51,10 @@ const SignedInBtn = () => {
           </div>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56 rounded">
+      <DropdownMenuContent className="w-60 rounded">
         <DropdownMenuLabel>
           <h4>{user?.name || "User"}</h4>
-          <p className="text-muted-foreground font-normal">
+          <p className="text-muted-foreground font-normal truncate">
             {user?.email || "user@example.com"}
           </p>
         </DropdownMenuLabel>
