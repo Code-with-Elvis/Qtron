@@ -1,7 +1,7 @@
 import RegisterForm from "@/components/auth/RegisterForm";
 import Link from "next/link";
 
-const Signup = () => {
+const SignUp = () => {
   return (
     <section className="py-10">
       <div className="qtron-container">
@@ -20,4 +20,4 @@ const Signup = () => {
     </section>
   );
 };
-export default Signup;
+export default SignUp;
