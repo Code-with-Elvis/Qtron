@@ -1,6 +1,6 @@
 "use client";
 
-import { userRegisterSchema } from "@/lib/validationSchemas";
+import { userLoginSchema } from "@/lib/validationSchemas";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
@@ -17,21 +17,59 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 const LoginForm = () => {
+  const [isPending, setIsPending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(userRegisterSchema),
+    resolver: zodResolver(userLoginSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof userRegisterSchema>) => {
-    console.log(data);
-  };
+  const onSubmit = async (data: z.infer<typeof userLoginSchema>) => {
+    try {
+      setIsPending(true);
+      setErrorMessage(""); // Clear previous errors
 
-  const isPending = false;
+      const result = await signIn("credentials", {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setErrorMessage("Invalid email or password");
+      } else if (result?.ok) {
+        router.push("/");
+        router.refresh();
+        toast.success("Logged in successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("Something went wrong. Please try again.");
+    } finally {
+      setIsPending(false);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-[400px]">
@@ -43,6 +81,11 @@ const LoginForm = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {errorMessage && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-600 text-sm">
+              {errorMessage}
+            </div>
+          )}
           {/* -- Email -- */}
           <div className="mb-2">
             <Label htmlFor="email" className="text-sm ml-1 mb-1">
