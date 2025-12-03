@@ -93,11 +93,11 @@ const LoginForm = () => {
             {isPending && <Loader className="size-5 animate-spin" />}
             {isPending ? "Validating..." : "Sign In"}
           </Button>
-          <p className="text-center text-sm text-neutral-600 font-anek-telugu dark:text-neutral-300">
+          <p className="text-center text-sm text-muted-foreground font-anek-telugu dark:text-neutral-300">
             Don&apos;t have an account?{" "}
             <Link
               href="/signup"
-              className="text-neutral-700 dark:text-neutral-200 hover:underline font-semibold transition-all duration-100 ease-in-out"
+              className=" dark:text-neutral-200 hover:underline font-semibold transition-all duration-100 ease-in-out"
             >
               Sign Up
             </Link>
