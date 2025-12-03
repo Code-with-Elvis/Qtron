@@ -116,7 +116,7 @@ const CategoriesBtn = () => {
               asChild
               className="justify-start px-6 w-full rounded-none"
             >
-              <Link href="/" className="inline-block w-full">
+              <Link href="/signin" className="inline-block w-full">
                 Sign in
               </Link>
             </Button>

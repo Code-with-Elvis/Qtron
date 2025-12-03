@@ -3,7 +3,7 @@ import Link from "next/link";
 const SignedOutBtn = () => {
   return (
     <Link
-      href="/"
+      href="/signin"
       className="cursor-pointer h-12.5 shrink-0 px-1.5 border-transparent hover:border-border border rounded hidden md:flex items-center gap-1 transition-all duration-100 ease-in-out"
     >
       <div className="flex flex-col gap-0.5">
