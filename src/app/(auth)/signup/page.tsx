@@ -16,11 +16,11 @@ const SignUp = () => {
         <RegisterForm />
         <footer className="text-center text-sm leading-relaxed text-muted-foreground mt-8 max-w-[400px] mx-auto">
           By continuing, you agree to Qtron&#39;{" "}
-          <Link href="/terms-conditions" className="underline">
+          <Link href="/terms" className="underline">
             terms of service
           </Link>{" "}
           and{" "}
-          <Link href="/privacy-policy" className="underline">
+          <Link href="/privacy" className="underline">
             privacy policy.
           </Link>
         </footer>
