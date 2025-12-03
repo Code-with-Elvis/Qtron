@@ -13,5 +13,6 @@ export function useAuth() {
     isSeller:
       session?.user?.role === "seller" || session?.user?.role === "admin",
     isVerified: session?.user?.isVerified,
+    photo: session?.user?.photo || null,
   };
 }

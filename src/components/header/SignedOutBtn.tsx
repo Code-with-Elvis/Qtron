@@ -1,6 +1,21 @@
+"use client";
+
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 
 const SignedOutBtn = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <article className="skeleton hidden md:block h-10 w-20 rounded"></article>
+    );
+  }
+
+  if (isAuthenticated) {
+    return null;
+  }
+
   return (
     <Link
       href="/signin"

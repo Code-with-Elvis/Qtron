@@ -1,3 +1,5 @@
+"use client";
+
 import { BiMenu } from "react-icons/bi";
 import {
   Sheet,
@@ -20,8 +22,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { categories } from "@/lib/data";
+import { useAuth } from "@/hooks/useAuth";
 
 const CategoriesBtn = () => {
+  const { user, isAuthenticated, isLoading } = useAuth();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -42,7 +47,12 @@ const CategoriesBtn = () => {
           <header className="flex items-center justify-between bg-primary text-white px-6 h-16">
             <div className="flex items-center gap-2">
               <CgProfile className="size-7.5" />
-              <span className="text-xl font-semibold">Hello, Sign in</span>
+              <span className="text-xl font-semibold">
+                Hello,{" "}
+                <span className=" first-letter:uppercase">
+                  {isAuthenticated ? user?.name : "Sign in"}
+                </span>
+              </span>
             </div>
             <SheetClose asChild>
               <Button
@@ -111,15 +121,17 @@ const CategoriesBtn = () => {
                 Orders
               </Link>
             </Button>
-            <Button
-              variant="ghost"
-              asChild
-              className="justify-start px-6 w-full rounded-none"
-            >
-              <Link href="/signin" className="inline-block w-full">
-                Sign in
-              </Link>
-            </Button>
+            {!isLoading && !isAuthenticated && (
+              <Button
+                variant="ghost"
+                asChild
+                className="justify-start px-6 w-full rounded-none"
+              >
+                <Link href="/signin" className="inline-block w-full">
+                  Sign in
+                </Link>
+              </Button>
+            )}
           </nav>
         </SheetFooter>
       </SheetContent>

@@ -9,6 +9,7 @@ import CartButton from "./CartButton";
 import SearchForm2 from "./SearchForm2";
 import CategoriesBtn from "./CategoriesBtn";
 import UserButton from "./UserButton";
+import SignedInBtn from "./SignedInBtn";
 
 const Header = () => {
   return (
@@ -30,6 +31,7 @@ const Header = () => {
         <LanguageBox />
         <ThemeBox />
         <SignedOutBtn />
+        <SignedInBtn />
         <div className="flex items-center gap-1">
           <UserButton />
           <CartButton />

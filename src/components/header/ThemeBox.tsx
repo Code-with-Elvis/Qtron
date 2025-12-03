@@ -39,7 +39,7 @@ const Theme = () => {
             <span className="font-semibold leading-none">
               {themes.find((t) => t.id === theme)?.label || "Volt"}
             </span>
-            <IoCaretDownSharp className="size-3" />
+            <IoCaretDownSharp className="size-3 mt-1" />
           </div>
         </div>
       </DropdownMenuTrigger>

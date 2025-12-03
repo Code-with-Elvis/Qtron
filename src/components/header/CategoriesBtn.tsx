@@ -1,3 +1,5 @@
+"use client";
+
 import { BiMenu } from "react-icons/bi";
 import {
   Sheet,
@@ -22,8 +24,11 @@ import { categories } from "@/lib/data";
 import Link from "next/link";
 import SheetTheme from "./SheetTheme";
 import SheetLanguageBox from "./SheetLanguageBox";
+import { useAuth } from "@/hooks/useAuth";
 
 const CategoriesBtn = () => {
+  const { user, isAuthenticated } = useAuth();
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -43,7 +48,12 @@ const CategoriesBtn = () => {
           <header className="flex items-center justify-between bg-primary text-white px-6 h-16">
             <div className="flex items-center gap-2">
               <CgProfile className="size-7.5" />
-              <span className="text-xl font-semibold">Hello, Sign in</span>
+              <span className="text-xl font-semibold">
+                Hello,{" "}
+                <span className=" first-letter:uppercase">
+                  {isAuthenticated ? user?.name : "Sign in"}
+                </span>
+              </span>
             </div>
             <SheetClose asChild>
               <Button
