@@ -460,3 +460,50 @@ export const footerLinks = [
     ],
   },
 ];
+
+export const navItems = [
+  {
+    title: "Dashboard",
+    path: "/admin",
+  },
+  {
+    title: "Orders",
+    path: "/admin/orders",
+  },
+  {
+    title: "Products",
+    path: "/admin/products",
+  },
+  {
+    title: "Categories",
+    path: "/admin/categories",
+  },
+  {
+    title: "Customers",
+    path: "/admin/customers",
+  },
+  {
+    title: "Inventory",
+    path: "/admin/inventory",
+  },
+  {
+    title: "Marketing",
+    path: "/admin/marketing",
+  },
+  {
+    title: "Reviews",
+    path: "/admin/reviews",
+  },
+  {
+    title: "Settings",
+    path: "/admin/settings",
+  },
+  {
+    title: "Analytics",
+    path: "/admin/analytics",
+  },
+  {
+    title: "Support",
+    path: "/admin/support",
+  },
+];
