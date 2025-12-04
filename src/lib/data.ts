@@ -475,6 +475,10 @@ export const navItems = [
     path: "/admin/products",
   },
   {
+    title: "Create Product",
+    path: "/admin/products/create",
+  },
+  {
     title: "Categories",
     path: "/admin/categories",
   },

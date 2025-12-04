@@ -11,33 +11,42 @@ export const productSchema = z.object({
     .array(z.string())
     .min(1, "At least one subcategory is required"),
   images: z.array(z.string()).min(1, "At least one image is required"),
-  price: z.string().refine(
-    (val) => {
-      const num = Number(val);
-      return !isNaN(num) && num >= 0;
-    },
-    {
-      message: "Price must be a non-negative number",
-    }
-  ),
-  listPrice: z.string().refine(
-    (val) => {
-      const num = Number(val);
-      return !isNaN(num) && num >= 0;
-    },
-    {
-      message: "List price must be a non-negative number",
-    }
-  ),
-  countInStock: z.string().refine(
-    (val) => {
-      const num = Number(val);
-      return Number.isInteger(num) && num >= 0;
-    },
-    {
-      message: "Count in stock must be a non-negative integer",
-    }
-  ),
+  price: z
+    .string()
+    .min(1, "Price is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return !isNaN(num) && num > 0;
+      },
+      {
+        message: "Price must be a positive number",
+      }
+    ),
+  listPrice: z
+    .string()
+    .min(1, "List price is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return !isNaN(num) && num > 0;
+      },
+      {
+        message: "List price must be a positive number",
+      }
+    ),
+  countInStock: z
+    .string()
+    .min(1, "Stock count is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return Number.isInteger(num) && num >= 0;
+      },
+      {
+        message: "Count in stock must be a non-negative integer",
+      }
+    ),
   colors: z.array(z.string()).min(1, "At least one color is required"),
   isPublished: z.boolean(),
   isFeatured: z.boolean().optional(),
