@@ -1,4 +1,10 @@
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+
 const Dashboard = () => {
-  return <div className="bg-green-400">Dashboard</div>;
+  return (
+    <div>
+      <ChartAreaInteractive />
+    </div>
+  );
 };
 export default Dashboard;
