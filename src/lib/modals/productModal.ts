@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const productSchema = new mongoose.Schema(
   {
@@ -17,8 +18,7 @@ const productSchema = new mongoose.Schema(
     },
     slug: {
       type: String,
-      unique: [true, "Slug must be unique"],
-      required: [true, "Slug is required"],
+      unique: true,
       index: true,
     },
     brand: {
@@ -148,6 +148,13 @@ productSchema.virtual("reviews", {
   ref: "Review",
   localField: "_id",
   foreignField: "product",
+});
+
+//---- Create Slug before saving ----
+productSchema.pre("save", function () {
+  if (this.isModified("name") || this.isNew) {
+    this.slug = slugify(this.name, { lower: true, strict: true });
+  }
 });
 
 // ---- Create indexes for better query performance ----

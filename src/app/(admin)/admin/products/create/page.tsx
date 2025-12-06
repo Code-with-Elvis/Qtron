@@ -18,9 +18,14 @@ import { productSchema } from "@/lib/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "sonner";
 import z from "zod";
+import { Loader } from "lucide-react";
 
 const CreateProduct = () => {
+  const router = useRouter();
   const [charCount, setCharCount] = useState(800);
   const [categories, setCategories] = useState<string[]>([]);
   const [subCat, setSubCat] = useState<string[]>([]);
@@ -28,6 +33,7 @@ const CreateProduct = () => {
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [keywords, setKeywords] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -77,8 +83,36 @@ const CreateProduct = () => {
     setValue("images", imageUrls);
   }, [imageUrls, setValue]);
 
-  const onSubmit = (data: z.infer<typeof productSchema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof productSchema>) => {
+    setIsSubmitting(true);
+
+    try {
+      const response = await axios.post("/api/products", data);
+
+      if (response.data.success) {
+        toast.success(response.data.message || "Product created successfully");
+        router.push("/admin/products");
+        router.refresh();
+      } else {
+        throw new Error(response.data.message || "Failed to create product");
+      }
+    } catch (error) {
+      console.error("Error creating product:", error);
+
+      if (axios.isAxiosError(error) && error.response?.data?.errors) {
+        // -- Handle Zod validation errors --
+        const errors = error.response.data.errors;
+        errors.forEach((err: { path: string[]; message: string }) => {
+          toast.error(`${err.path.join(".")}: ${err.message}`);
+        });
+      } else if (axios.isAxiosError(error) && error.response?.data?.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Failed to create product. Please try again.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <section>
@@ -94,6 +128,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="name"
+                placeholder="Enter product name"
                 {...register("name")}
                 className={`rounded ${
                   errors.name ? "border-red-400" : "border-neutral-300"
@@ -114,6 +149,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="brand"
+                placeholder="Enter product brand"
                 {...register("brand")}
                 className={`rounded ${
                   errors.brand ? "border-red-400" : "border-neutral-300"
@@ -189,6 +225,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="price"
+                placeholder="Enter product price"
                 {...register("price")}
                 className={`rounded ${
                   errors.price ? "border-red-400" : "border-neutral-300"
@@ -209,6 +246,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="list-price"
+                placeholder="Enter product list price"
                 {...register("listPrice")}
                 className={`rounded ${
                   errors.listPrice ? "border-red-400" : "border-neutral-300"
@@ -229,6 +267,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="stock-count"
+                placeholder="Enter stock count"
                 {...register("countInStock")}
                 className={`rounded ${
                   errors.countInStock ? "border-red-400" : "border-neutral-300"
@@ -285,6 +324,7 @@ const CreateProduct = () => {
               <Input
                 type="text"
                 id="delivery-estimate"
+                placeholder="e.g., 3-5 business days"
                 {...register("deliveryEstimate")}
                 className={`rounded ${
                   errors.deliveryEstimate
@@ -401,8 +441,14 @@ const CreateProduct = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button size={"lg"} className="rounded min-w-60">
-              Create Product
+            <Button
+              type="submit"
+              size={"lg"}
+              className="rounded min-w-60"
+              disabled={isSubmitting}
+            >
+              {isSubmitting && <Loader className="size-5 animate-spin" />}
+              {isSubmitting ? "Creating..." : "Create Product"}
             </Button>
           </CardFooter>
         </Card>
