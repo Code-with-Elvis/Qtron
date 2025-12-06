@@ -25,8 +25,7 @@ const CreateProduct = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [subCat, setSubCat] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
-  const [images, setImages] = useState<File[]>([]);
-  const [previews, setPreviews] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [keywords, setKeywords] = useState<string[]>([]);
   const [features, setFeatures] = useState<string[]>([]);
 
@@ -75,12 +74,11 @@ const CreateProduct = () => {
   }, [features, setValue]);
 
   useEffect(() => {
-    setValue("images", previews);
-  }, [previews, setValue]);
+    setValue("images", imageUrls);
+  }, [imageUrls, setValue]);
 
   const onSubmit = (data: z.infer<typeof productSchema>) => {
     console.log(data);
-    console.log("Images files:", images);
   };
   return (
     <section>
@@ -247,9 +245,8 @@ const CreateProduct = () => {
             <div className="mb-2">
               <h4 className="text-sm font-medium ml-1 mb-1">Images:</h4>
               <UploadImageInput
-                setImages={setImages}
-                previews={previews}
-                setPreviews={setPreviews}
+                imageUrls={imageUrls}
+                setImageUrls={setImageUrls}
                 imageCount={5}
               />
               {errors.images && (

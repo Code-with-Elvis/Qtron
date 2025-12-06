@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true, // Ignore TypeScript errors during production builds
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+      },
+      {
+        protocol: "https",
+        hostname: "vye2wc9mk1.ufs.sh",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
