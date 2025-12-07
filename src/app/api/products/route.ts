@@ -93,3 +93,153 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+// === GET /api/products - Get products with filters, search, sorting, and pagination ===
+
+export async function GET(req: NextRequest) {
+  try {
+    await connectToDB();
+
+    const { searchParams } = new URL(req.url);
+
+    // -- Pagination parameters --
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1"));
+    const limit = Math.max(
+      1,
+      Math.min(100, parseInt(searchParams.get("limit") || "10"))
+    );
+    const skip = (page - 1) * limit;
+
+    // -- Search query --
+    const searchQuery = searchParams.get("q")?.trim();
+
+    // -- Filter parameters --
+    const category = searchParams.get("category")?.trim();
+    const subCategory = searchParams.get("subcategory")?.trim();
+    const brand = searchParams.get("brand")?.trim();
+    const priceMin = searchParams.get("price_min");
+    const priceMax = searchParams.get("price_max");
+    const rating = searchParams.get("rating");
+    const isPublished = searchParams.get("isPublished");
+    const isFeatured = searchParams.get("isFeatured");
+    const freeShipping = searchParams.get("freeShipping");
+
+    // -- Sort parameter --
+    const sort = searchParams.get("sort") || "latest";
+
+    // -- Build filter object --
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const filter: Record<string, any> = {};
+
+    // -- Search across multiple fields (case-insensitive) --
+    if (searchQuery) {
+      filter.$or = [
+        { name: { $regex: searchQuery, $options: "i" } },
+        { brand: { $regex: searchQuery, $options: "i" } },
+        { category: { $regex: searchQuery, $options: "i" } },
+        { subCategory: { $regex: searchQuery, $options: "i" } },
+        { description: { $regex: searchQuery, $options: "i" } },
+        { keywords: { $in: [new RegExp(searchQuery, "i")] } },
+        {
+          features: {
+            $elemMatch: { value: { $regex: searchQuery, $options: "i" } },
+          },
+        },
+      ];
+    }
+
+    // -- Category filter (exact match, case-insensitive) --
+    if (category) {
+      filter.category = { $regex: `^${category}$`, $options: "i" };
+    }
+
+    // -- SubCategory filter (exact match, case-insensitive) --
+    if (subCategory) {
+      filter.subCategory = { $regex: `^${subCategory}$`, $options: "i" };
+    }
+
+    // -- Brand filter (exact match, case-insensitive) --
+    if (brand) {
+      filter.brand = { $regex: `^${brand}$`, $options: "i" };
+    }
+
+    // -- Price range filter --
+    if (priceMin || priceMax) {
+      filter.price = {};
+      if (priceMin) filter.price.$gte = parseFloat(priceMin);
+      if (priceMax) filter.price.$lte = parseFloat(priceMax);
+    }
+
+    // -- Rating filter (minimum rating) --
+    if (rating) {
+      filter.rating = { $gte: parseFloat(rating) };
+    }
+
+    // -- Boolean filters --
+    if (isPublished !== null && isPublished !== undefined) {
+      filter.isPublished = isPublished === "true";
+    }
+
+    if (isFeatured !== null && isFeatured !== undefined) {
+      filter.isFeatured = isFeatured === "true";
+    }
+
+    if (freeShipping !== null && freeShipping !== undefined) {
+      filter.freeShipping = freeShipping === "true";
+    }
+
+    // -- Build sort object --
+    let sortObj: Record<string, 1 | -1> = {};
+
+    switch (sort) {
+      case "price_asc":
+        sortObj = { price: 1 };
+        break;
+      case "price_desc":
+        sortObj = { price: -1 };
+        break;
+      case "rating":
+        sortObj = { rating: -1, numReviews: -1 };
+        break;
+      case "latest":
+      default:
+        sortObj = { createdAt: -1 };
+        break;
+    }
+
+    // -- Execute query with pagination --
+    const [products, totalCount] = await Promise.all([
+      Product.find(filter).sort(sortObj).skip(skip).limit(limit).lean(),
+      Product.countDocuments(filter),
+    ]);
+
+    // -- Calculate pagination metadata --
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return NextResponse.json(
+      {
+        success: true,
+        products,
+        pagination: {
+          currentPage: page,
+          totalPages,
+          totalCount,
+          limit,
+          hasNextPage: page < totalPages,
+          hasPreviousPage: page > 1,
+        },
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to fetch products",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+}
