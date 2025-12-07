@@ -1,11 +1,12 @@
 import { Product, ResultsProps } from "@/lib/types/data";
 import { formatDate, trimProductId } from "@/lib/utils";
 import { IconMoodEmptyFilled } from "@tabler/icons-react";
-import { AlertTriangle, Edit, View } from "lucide-react";
+import { AlertTriangle, Edit, Plus, View } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Pagination from "../global/Pagination";
+import SearchForm from "./SearchForm";
 
 const Results = async ({ searchParams }: ResultsProps) => {
   try {
@@ -32,16 +33,46 @@ const Results = async ({ searchParams }: ResultsProps) => {
 
     if (data.products.length === 0) {
       return (
-        <div className="text-center mt-16 text-neutral-400">
-          <IconMoodEmptyFilled className="inline size-10 mb-2 text-yellow-400 animate-pulse" />
-          <p>No products found matching your criteria.</p>
-        </div>
+        <>
+          <header className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-4">
+              <SearchForm />
+              <p className="hidden sm:block">
+                Total: {data?.pagination?.totalCount} items
+              </p>
+            </div>
+            <Button asChild size="sm" className="rounded hidden md:flex">
+              <Link href="/admin/products/create">
+                <Plus /> Create Product
+              </Link>
+            </Button>
+          </header>
+          <div className="text-center mt-16">
+            <IconMoodEmptyFilled className="inline size-10 mb-2 text-yellow-400 animate-pulse" />
+            <p className="text-muted-foreground">
+              No products found matching your criteria.
+            </p>
+          </div>
+        </>
       );
     }
 
     return (
       <>
-        {" "}
+        <header className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-4">
+            <SearchForm />
+            <p className="hidden sm:block">
+              Total: {data?.pagination?.totalCount} items
+            </p>
+          </div>
+          <Button asChild size="sm" className="rounded hidden md:flex">
+            <Link href="/admin/products/create">
+              <Plus /> Create Product
+            </Link>
+          </Button>
+        </header>
+
         <div className=" overflow-x-auto pb-3">
           <table className="border w-full min-w-2xl">
             <thead>
