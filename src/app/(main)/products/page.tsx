@@ -24,9 +24,16 @@ const ProductsPage = ({ searchParams }: ProductsPageProps) => {
   return (
     <section className="py-8">
       <div className="qtron-container flex gap-6">
-        <Suspense fallback={<div className="w-72 h-screen" />}>
+        <Suspense
+          fallback={
+            <div className="w-72 h-screen">
+              <article className="skeleton w-full h-20"></article>
+            </div>
+          }
+        >
           <Filter />
         </Suspense>
+
         <Suspense fallback={<Loading />}>
           <SearchResults searchParams={searchParams} />
         </Suspense>

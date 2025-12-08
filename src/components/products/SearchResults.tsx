@@ -3,6 +3,7 @@ import { AlertTriangle } from "lucide-react";
 import ProductCard from "./ProductCard";
 import { SortSelect } from "./SortSelect";
 import { Pagination } from "./PaginationControls";
+import SmallScreenFilter from "./SmallScreenFilter";
 
 interface SearchResultsProps {
   searchParams?: Promise<{
@@ -71,13 +72,19 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
         {/* === Header with results count and sort === */}
         <div className="flex items-center justify-between mb-6 pb-4 border-b">
           <div>
-            <p className=" text-muted-foreground mt-1">
+            <p className=" text-muted-foreground mt-1 hidden sm:block">
               <span className="font-bold">{pagination.totalCount}</span>{" "}
               {pagination.totalCount === 1 ? "product" : "products"} found
             </p>
+            <p className="sm:hidden">
+              <span className="font-bold">{pagination.totalCount}</span> Items
+            </p>
           </div>
 
-          <SortSelect currentSort={params?.sort} />
+          <div className="flex items-center gap-2">
+            <SmallScreenFilter />
+            <SortSelect currentSort={params?.sort} />
+          </div>
         </div>
 
         {/* === Products Grid === */}
