@@ -13,7 +13,7 @@ const DealsResults = async () => {
 
     return <ProductsSlider products={data.products} />;
   } catch (error) {
-    console.error("Error fetching meals:", error);
+    console.error("Error fetching deals:", error);
     return (
       <div className="text-center text-red-500 mt-16">
         <AlertTriangle className="inline size-9 animate-pulse text-yellow-400  mb-4" />
