@@ -122,6 +122,8 @@ export async function GET(req: NextRequest) {
     const rating = searchParams.get("rating");
     const isPublished = searchParams.get("isPublished");
     const isFeatured = searchParams.get("isFeatured");
+    const isBestSeller = searchParams.get("isBestSeller");
+    const isDeal = searchParams.get("isDeal");
     const freeShipping = searchParams.get("freeShipping");
 
     // -- Sort parameter --
@@ -148,19 +150,38 @@ export async function GET(req: NextRequest) {
       ];
     }
 
-    // -- Category filter (exact match, case-insensitive) --
+    // -- Category filter (supports multiple comma-separated values) --
     if (category) {
-      filter.category = { $regex: `^${category}$`, $options: "i" };
+      const categories = category.split(",").map((c) => c.trim());
+      if (categories.length === 1) {
+        filter.category = { $regex: `^${categories[0]}$`, $options: "i" };
+      } else {
+        filter.category = {
+          $in: categories.map((c) => new RegExp(`^${c}$`, "i")),
+        };
+      }
     }
 
-    // -- SubCategory filter (exact match, case-insensitive) --
+    // -- SubCategory filter (supports multiple comma-separated values) --
     if (subCategory) {
-      filter.subCategory = { $regex: `^${subCategory}$`, $options: "i" };
+      const subCategories = subCategory.split(",").map((c) => c.trim());
+      if (subCategories.length === 1) {
+        filter.subCategory = { $regex: `^${subCategories[0]}$`, $options: "i" };
+      } else {
+        filter.subCategory = {
+          $in: subCategories.map((c) => new RegExp(`^${c}$`, "i")),
+        };
+      }
     }
 
-    // -- Brand filter (exact match, case-insensitive) --
+    // -- Brand filter (supports multiple comma-separated values) --
     if (brand) {
-      filter.brand = { $regex: `^${brand}$`, $options: "i" };
+      const brands = brand.split(",").map((b) => b.trim());
+      if (brands.length === 1) {
+        filter.brand = { $regex: `^${brands[0]}$`, $options: "i" };
+      } else {
+        filter.brand = { $in: brands.map((b) => new RegExp(`^${b}$`, "i")) };
+      }
     }
 
     // -- Price range filter --
@@ -182,6 +203,14 @@ export async function GET(req: NextRequest) {
 
     if (isFeatured !== null && isFeatured !== undefined) {
       filter.isFeatured = isFeatured === "true";
+    }
+
+    if (isBestSeller !== null && isBestSeller !== undefined) {
+      filter.isBestSeller = isBestSeller === "true";
+    }
+
+    if (isDeal !== null && isDeal !== undefined) {
+      filter.isDeal = isDeal === "true";
     }
 
     if (freeShipping !== null && freeShipping !== undefined) {
