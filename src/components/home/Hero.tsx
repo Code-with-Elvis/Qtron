@@ -52,7 +52,7 @@ const Hero = () => {
                     checkout.
                   </p>
                   <Button className="mt-4 w-max" size="lg">
-                    <Link href="/shop">Shop Now</Link>
+                    <Link href="/products?isDeal=true">Shop Now</Link>
                   </Button>
                 </div>
                 <div>
@@ -68,7 +68,7 @@ const Hero = () => {
             </CarouselItem>
             <CarouselItem className="pl-2 md:pl-4 basis-full md:basis-1/2">
               <Link
-                href="/shop"
+                href="/products?category=TVs%20%26%20Home%20Entertainment"
                 className="bg-primary/14 h-80 rounded flex flex-col justify-between overflow-hidden"
               >
                 <Image

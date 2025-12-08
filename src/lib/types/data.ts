@@ -37,6 +37,8 @@ export type Product = {
   deliveryEstimate?: string;
   keywords?: string[];
   features?: { name: string; value: string }[];
+  ratingsAverage?: number;
+  ratingCount?: number;
   updatedAt: string;
   createdAt: string;
 };
