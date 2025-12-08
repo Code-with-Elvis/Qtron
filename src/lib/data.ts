@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 type Category = {
   name: string;
   subcategories: string[];
@@ -116,6 +118,9 @@ export const categories: Category[] = [
       "Smart Glasses",
       "Health Monitors",
       "Watch Bands & Straps",
+      "Wearable Accessories",
+      "Smart Rings",
+      "Analog Watches",
     ],
   },
   {
@@ -167,6 +172,13 @@ export const categories: Category[] = [
       "Dehumidifiers",
       "Electric Kettles",
       "Coffee Makers",
+      "Microwaves",
+      "Toasters",
+      "Refrigerators",
+      "Washing Machines",
+      "Dryers",
+      "Dishwashers",
+      "Blenders",
     ],
   },
   {
@@ -358,6 +370,39 @@ export const homeShortCutCategories = [
         image: "/categories/Adapters.png",
       },
     ],
+  },
+];
+
+export const homeExploreSubcategories = [
+  {
+    id: 1,
+    name: "Analog Watches",
+    image: "/categories/AnalogWatches.png",
+    link: "/products?subcategory=analog-watches",
+  },
+  {
+    id: 2,
+    name: "Cameras",
+    image: "/categories/Cameras.png",
+    link: "/products?subcategory=digital-cameras",
+  },
+  {
+    id: 3,
+    name: "Refrigerators",
+    image: "/categories/Refrigerators.png",
+    link: "/products?subcategory=refrigerators",
+  },
+  {
+    id: 4,
+    name: "Smart Watches",
+    image: "/categories/SmartWatches.png",
+    link: "/products?subcategory=smart-watches",
+  },
+  {
+    id: 5,
+    name: "Blenders",
+    image: "/categories/Blenders.png",
+    link: "/products?subcategory=blenders",
   },
 ];
 
