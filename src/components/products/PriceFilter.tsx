@@ -3,32 +3,55 @@
 import { useState, useEffect } from "react";
 import { Field, FieldDescription, FieldTitle } from "@/components/ui/field";
 import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
+import { useRouter, useSearchParams } from "next/navigation";
 
-interface PriceFilterProps {
-  onPriceChange: (min: number, max: number) => void;
-  initialMin?: number;
-  initialMax?: number;
-}
+export function PriceFilter() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [value, setValue] = useState([0, 5000]);
 
-export function PriceFilter({
-  onPriceChange,
-  initialMin = 0,
-  initialMax = 5000,
-}: PriceFilterProps) {
-  const [value, setValue] = useState([initialMin, initialMax]);
+  // === Read initial values from URL after mount ===
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      onPriceChange(value[0], value[1]);
-    }, 500);
+    const min = parseInt(searchParams.get("price_min") || "0");
+    const max = parseInt(searchParams.get("price_max") || "5000");
+    setValue([min, max]);
+  }, [searchParams]);
 
-    return () => clearTimeout(timer);
-  }, [value, onPriceChange]);
+  const handleApply = () => {
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value[0] > 0) {
+      params.set("price_min", value[0].toString());
+    } else {
+      params.delete("price_min");
+    }
+
+    if (value[1] < 5000) {
+      params.set("price_max", value[1].toString());
+    } else {
+      params.delete("price_max");
+    }
+
+    params.delete("page"); // Reset to page 1
+    router.push(`/products?${params.toString()}`);
+  };
 
   return (
     <div className="w-full">
       <Field>
-        <FieldTitle>Price Range</FieldTitle>
+        <FieldTitle className="font-bold text-base flex items-center justify-between">
+          Price
+          <Button
+            variant="outline"
+            onClick={handleApply}
+            className=""
+            size="sm"
+          >
+            Apply
+          </Button>
+        </FieldTitle>
         <FieldDescription>
           Set your budget range ($
           <span className="font-medium tabular-nums">{value[0]}</span> - $

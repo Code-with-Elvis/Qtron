@@ -13,7 +13,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/products/${product.slug}`}
-      className="group block bg-card rounded-lg overflow-hidden border hover:shadow-lg transition-shadow"
+      className="group block overflow-hidden"
     >
       <div className="relative aspect-square bg-muted">
         <Image
@@ -21,25 +21,20 @@ function ProductCard({ product }: { product: Product }) {
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-cover  group-hover:scale-105 transition-transform duration-300"
         />
         {discount > 0 && (
           <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
-            -{discount}%
-          </span>
-        )}
-        {product.isFeatured && (
-          <span className="absolute top-2 right-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded">
-            Featured
+            {discount}% off
           </span>
         )}
       </div>
 
-      <div className="p-4">
+      <div className="py-4">
         <h3 className="font-medium text-sm line-clamp-2 mb-2 group-hover:text-primary transition-colors">
           {product.name}
         </h3>
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex max-[360px]:flex-col items-center max-[360px]:items-start max-[360px]:gap-1 gap-2 mb-2">
           <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
           {product.listPrice && product.listPrice > product.price && (
             <span className="text-sm text-muted-foreground line-through">

@@ -57,25 +57,6 @@ const Filter = () => {
     router.push(`/products?${params.toString()}`);
   };
 
-  const handlePriceChange = (min: number, max: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (min > 0) {
-      params.set("price_min", min.toString());
-    } else {
-      params.delete("price_min");
-    }
-
-    if (max < 5000) {
-      params.set("price_max", max.toString());
-    } else {
-      params.delete("price_max");
-    }
-
-    params.delete("page");
-    router.push(`/products?${params.toString()}`);
-  };
-
   const clearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
     const searchQuery = params.get("q");
@@ -97,9 +78,9 @@ const Filter = () => {
     searchParams.get("price_max");
 
   return (
-    <aside className="w-72 sticky top-20 h-fit pr-6 border-r hidden lg:block">
+    <aside className="w-72 sticky top-20 h-fit pr-6 border-r hidden md:block">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">Filters</h2>
+        <h2 className="text-xl font-semibold">Filter By:</h2>
         {hasActiveFilters && (
           <Button
             variant="ghost"
@@ -116,11 +97,7 @@ const Filter = () => {
       <div className="space-y-6">
         {/* Price Filter */}
         <div className="pb-6 border-b">
-          <PriceFilter
-            onPriceChange={handlePriceChange}
-            initialMin={parseInt(searchParams.get("price_min") || "0")}
-            initialMax={parseInt(searchParams.get("price_max") || "5000")}
-          />
+          <PriceFilter />
         </div>
 
         {/* Categories */}

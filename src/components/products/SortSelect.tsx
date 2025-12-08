@@ -22,7 +22,7 @@ export function SortSelect({ currentSort }: { currentSort?: string }) {
 
   return (
     <Select value={currentSort || "latest"} onValueChange={handleSortChange}>
-      <SelectTrigger className="w-[200px]">
+      <SelectTrigger className="w-40 rounded">
         <SelectValue placeholder="Sort by" />
       </SelectTrigger>
       <SelectContent>

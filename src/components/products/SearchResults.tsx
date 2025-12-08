@@ -58,14 +58,11 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
 
     return (
       <div className="flex-1 min-h-screen">
-        {/* Header with results count and sort */}
+        {/* === Header with results count and sort === */}
         <div className="flex items-center justify-between mb-6 pb-4 border-b">
           <div>
-            <h1 className="text-2xl font-bold">
-              {params?.q ? `Search results for "${params.q}"` : "All Products"}
-            </h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {pagination.totalCount}{" "}
+            <p className=" text-muted-foreground mt-1">
+              <span className="font-bold">{pagination.totalCount}</span>{" "}
               {pagination.totalCount === 1 ? "product" : "products"} found
             </p>
           </div>
@@ -73,7 +70,7 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
           <SortSelect currentSort={params?.sort} />
         </div>
 
-        {/* Products Grid */}
+        {/* === Products Grid === */}
         {products.length === 0 ? (
           <div className="text-center py-16">
             <AlertTriangle className="inline size-12 text-yellow-400 mb-4" />
@@ -84,7 +81,7 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {products.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
