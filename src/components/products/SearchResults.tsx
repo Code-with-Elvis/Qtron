@@ -14,6 +14,10 @@ interface SearchResultsProps {
     sort?: string;
     page?: string;
     limit?: string;
+    isFeatured?: string;
+    isBestSeller?: string;
+    isDeal?: string;
+    freeShipping?: string;
   }>;
 }
 
@@ -29,6 +33,12 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
     if (params?.brand) urlParams.set("brand", params.brand);
     if (params?.price_min) urlParams.set("price_min", params.price_min);
     if (params?.price_max) urlParams.set("price_max", params.price_max);
+    if (params?.isFeatured) urlParams.set("isFeatured", params.isFeatured);
+    if (params?.isBestSeller)
+      urlParams.set("isBestSeller", params.isBestSeller);
+    if (params?.isDeal) urlParams.set("isDeal", params.isDeal);
+    if (params?.freeShipping)
+      urlParams.set("freeShipping", params.freeShipping);
     if (params?.sort) urlParams.set("sort", params.sort);
     if (params?.page) urlParams.set("page", params.page);
     urlParams.set("limit", params?.limit || "20");

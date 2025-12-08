@@ -13,6 +13,10 @@ interface ProductsPageProps {
     sort?: string;
     page?: string;
     limit?: string;
+    isFeatured?: string;
+    isBestSeller?: string;
+    isDeal?: string;
+    freeShipping?: string;
   }>;
 }
 
