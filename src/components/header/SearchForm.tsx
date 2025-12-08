@@ -43,9 +43,15 @@ const SearchForm = () => {
     e.preventDefault();
 
     if (searchTerm.trim()) {
-      const params = new URLSearchParams(); // Create a fresh set of search parameters
-      params.set("q", searchTerm); // Add only the search term to the URL
-      router.push(`?${params.toString()}`); // Apply new search params to URL
+      const params = new URLSearchParams();
+      params.set("q", searchTerm);
+
+      // Add category filter if not "All"
+      if (selectedCategory !== "All") {
+        params.set("category", selectedCategory);
+      }
+
+      router.push(`/products?${params.toString()}`);
     }
   };
 
