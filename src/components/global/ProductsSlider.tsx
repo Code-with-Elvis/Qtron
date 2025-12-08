@@ -94,7 +94,7 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
       >
         {products.map((product) => (
           <SwiperSlide key={product._id}>
-            <Link href={`/products/${product.slug}`} className="block">
+            <Link href={`/products/${product.slug}`} className="block group">
               {/* Product Image */}
               <div className="relative aspect-square bg-gray-100">
                 <Image
@@ -113,11 +113,11 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
 
               {/* Product Info */}
               <div className="p-4">
-                <h3 className="font-medium text-sm line-clamp-3 mb-2 text-gray-800 group-hover/card:text-primary transition-colors">
+                <h3 className="font-medium text-sm line-clamp-3 mb-2 group-hover:text-primary transition-colors">
                   {product.name}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-lg font-bold text-gray-900">
+                  <span className="text-lg font-bold">
                     ${product.price.toFixed(2)}
                   </span>
                   {product.listPrice && product.listPrice > product.price && (
