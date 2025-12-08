@@ -15,11 +15,16 @@ import {
 import { useState, useRef, useEffect } from "react";
 import { categories } from "@/lib/data";
 import { IoCaretDownSharp } from "react-icons/io5";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SearchForm = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [buttonWidth, setButtonWidth] = useState(80);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -27,8 +32,25 @@ const SearchForm = () => {
     }
   }, [selectedCategory]);
 
+  // === Extract the search term from URL on page load ===
+  useEffect(() => {
+    const query = searchParams.get("q") || "";
+    setSearchTerm(query);
+  }, [searchParams]);
+
+  // === Handle form submission ===
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (searchTerm.trim()) {
+      const params = new URLSearchParams(); // Create a fresh set of search parameters
+      params.set("q", searchTerm); // Add only the search term to the URL
+      router.push(`?${params.toString()}`); // Apply new search params to URL
+    }
+  };
+
   return (
-    <form className="flex-1 relative hidden lg:block">
+    <form onSubmit={handleSubmit} className="flex-1 relative hidden lg:block">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
@@ -61,8 +83,11 @@ const SearchForm = () => {
         className="h-10 rounded relative"
         style={{ paddingLeft: `${buttonWidth + 8}px`, paddingRight: "60px" }}
         placeholder="Seach Qtron"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <Button
+        type="submit"
         variant="secondary"
         className="absolute z-10 right-0 top-0 h-10 rounded rounded-l-none "
       >
