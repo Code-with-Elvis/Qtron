@@ -1,3 +1,4 @@
+import Brands from "@/components/home/Brands";
 import CategoryMarquee from "@/components/home/CategoryMarquee";
 import ExploreSubcategories from "@/components/home/ExploreSubcategories";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
@@ -11,6 +12,7 @@ const HomePage = () => {
       <ShortcutCategories />
       <FeaturedProducts />
       <ExploreSubcategories />
+      <Brands />
       <CategoryMarquee />
     </section>
   );

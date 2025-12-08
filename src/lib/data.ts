@@ -406,6 +406,69 @@ export const homeExploreSubcategories = [
   },
 ];
 
+export const featuredBrands = [
+  {
+    name: "LG",
+    image: "/brands/LG.png",
+    link: "/products?brand=lg",
+  },
+  {
+    name: "Sony",
+    image: "/brands/Sony.png",
+    link: "/products?brand=sony",
+  },
+  {
+    name: "Apple",
+    image: "/brands/Apple.png",
+    link: "/products?brand=apple",
+  },
+  {
+    name: "Samsung",
+    image: "/brands/Samsung.png",
+    link: "/products?brand=samsung",
+  },
+  {
+    name: "Hisense",
+    image: "/brands/Hisense.png",
+    link: "/products?brand=hisense",
+  },
+  {
+    name: "Acer",
+    image: "/brands/Acer.png",
+    link: "/products?brand=acer",
+  },
+  {
+    name: "Alpine",
+    image: "/brands/Alpine.png",
+    link: "/products?brand=alpine",
+  },
+  {
+    name: "AVF",
+    image: "/brands/AVF.png",
+    link: "/products?brand=avf",
+  },
+  {
+    name: "Canon",
+    image: "/brands/Canon.png",
+    link: "/products?brand=canon",
+  },
+  {
+    name: "GBL",
+    image: "/brands/GBL.png",
+    link: "/products?brand=gbl",
+  },
+  {
+    name: "Amana",
+    image: "/brands/Amana.png",
+    link: "/products?brand=amana",
+  },
+  {
+    name: "Asus",
+    image: "/brands/Asus.png",
+    link: "/products?brand=asus",
+  },
+];
+
 export const footerLinks = [
   {
     title: "About Qtron",
