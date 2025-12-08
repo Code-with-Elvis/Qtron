@@ -94,7 +94,10 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
       >
         {products.map((product) => (
           <SwiperSlide key={product._id}>
-            <Link href={`/products/${product.slug}`} className="block group">
+            <Link
+              href={`/products/${product.slug}`}
+              className="block group/product"
+            >
               {/* Product Image */}
               <div className="relative aspect-square bg-gray-100">
                 <Image
@@ -102,7 +105,7 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
                   alt={product.name}
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
-                  className="object-cover group-hover/card:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover/product:scale-105 transition-transform duration-300"
                 />
                 {product.isFeatured && (
                   <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded">
@@ -113,7 +116,7 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
 
               {/* Product Info */}
               <div className="p-4">
-                <h3 className="font-medium text-sm line-clamp-3 mb-2 group-hover:text-primary transition-colors">
+                <h3 className="font-medium text-sm line-clamp-3 mb-2 group-hover/product:text-primary transition-colors">
                   {product.name}
                 </h3>
                 <div className="flex items-center gap-2">
