@@ -9,6 +9,7 @@ interface SearchResultsProps {
   searchParams?: Promise<{
     q?: string;
     category?: string;
+    subcategory?: string;
     brand?: string;
     price_min?: string;
     price_max?: string;
@@ -31,6 +32,7 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
     const urlParams = new URLSearchParams();
     if (params?.q) urlParams.set("q", params.q);
     if (params?.category) urlParams.set("category", params.category);
+    if (params?.subcategory) urlParams.set("subcategory", params.subcategory);
     if (params?.brand) urlParams.set("brand", params.brand);
     if (params?.price_min) urlParams.set("price_min", params.price_min);
     if (params?.price_max) urlParams.set("price_max", params.price_max);

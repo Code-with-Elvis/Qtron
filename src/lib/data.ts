@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 type Category = {
   name: string;
   subcategories: string[];
@@ -332,17 +330,25 @@ export const homeShortCutCategories = [
         id: 1,
         name: "Headphones",
         image: "/categories/Headphones.png",
+        link: "/products?subcategory=headphones",
       },
       {
         id: 2,
         name: "Speakers",
         image: "/categories/Speakers.png",
+        link: "/products?subcategory=speakers",
       },
-      { id: 3, name: "Soundbars", image: "/categories/Soundbars.png" },
+      {
+        id: 3,
+        name: "Soundbars",
+        image: "/categories/Soundbars.png",
+        link: "/products?subcategory=soundbars",
+      },
       {
         id: 4,
         name: "Microphones",
         image: "/categories/Microphones.png",
+        link: "/products?subcategory=microphones",
       },
     ],
   },
@@ -353,21 +359,25 @@ export const homeShortCutCategories = [
         id: 5,
         name: "Gaming",
         image: "/categories/Gaming.png",
+        link: "/products?category=gaming",
       },
       {
         id: 6,
         name: "Chargers",
         image: "/categories/Chargers.png",
+        link: "/products?q=chargers",
       },
       {
         id: 7,
         name: "Tablets",
         image: "/categories/Tablets.png",
+        link: "/products?q=tablets",
       },
       {
         id: 8,
         name: "Adapters",
         image: "/categories/Adapters.png",
+        link: "/products?q=adapters",
       },
     ],
   },

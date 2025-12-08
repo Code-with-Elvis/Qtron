@@ -13,7 +13,7 @@ const Loading = () => {
         {/* Loading text with animated dots */}
         <div className="flex items-center gap-2">
           <motion.p
-            className="text-lg font-medium bg-linear-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent bg-[length:200%_auto]"
+            className="text-lg font-medium bg-linear-to-r from-primary via-purple-500 to-primary bg-clip-text text-transparent bg-size-[200%_auto]"
             animate={{
               backgroundPosition: ["0%", "100%", "0%"],
             }}

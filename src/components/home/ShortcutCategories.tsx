@@ -11,7 +11,7 @@ const ShortcutCategories = () => {
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {homeShortCutCategories[0].products.map((product) => (
-            <Link href="#" className="block" key={product.id}>
+            <Link href={product.link} className="block" key={product.id}>
               <Image
                 src={product.image}
                 alt={product.name}
@@ -30,7 +30,7 @@ const ShortcutCategories = () => {
         </h2>
         <div className="grid grid-cols-2 gap-4">
           {homeShortCutCategories[1].products.map((product) => (
-            <Link href="#" className="block" key={product.id}>
+            <Link href={product.link} className="block" key={product.id}>
               <Image
                 src={product.image}
                 alt={product.name}

@@ -81,19 +81,20 @@ const CategoriesBtn = () => {
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">
                   <nav className="flex flex-col">
-                    {category.subcategories.map((subcategory, subIndex) => (
-                      <Link
-                        key={subIndex}
-                        href={`/category/${category.name
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}/${subcategory
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`}
-                        className="px-12 py-2 text-sm hover:bg-accent transition-colors"
-                      >
-                        {subcategory}
-                      </Link>
-                    ))}
+                    {category.subcategories.map((subcategory, subIndex) => {
+                      const params = new URLSearchParams();
+                      params.set("category", category.name);
+                      params.set("subcategory", subcategory);
+                      return (
+                        <Link
+                          key={subIndex}
+                          href={`/products?${params.toString()}`}
+                          className="px-12 py-2 text-sm hover:bg-accent transition-colors"
+                        >
+                          {subcategory}
+                        </Link>
+                      );
+                    })}
                   </nav>
                 </AccordionContent>
               </AccordionItem>
