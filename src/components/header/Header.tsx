@@ -10,6 +10,7 @@ import SearchForm2 from "./SearchForm2";
 import CategoriesBtn from "./CategoriesBtn";
 import UserButton from "./UserButton";
 import SignedInBtn from "./SignedInBtn";
+import { Suspense } from "react";
 
 const Header = () => {
   return (
@@ -26,8 +27,12 @@ const Header = () => {
           </Link>
         </div>
         <LocationBox />
-        <SearchForm />
-        <SearchForm2 />
+        <Suspense fallback={<div className="flex-1 h-10 rounded border" />}>
+          <SearchForm />
+        </Suspense>
+        <Suspense fallback={<div className="flex-1 h-10 rounded border" />}>
+          <SearchForm2 />
+        </Suspense>
         <LanguageBox />
         <ThemeBox />
         <SignedOutBtn />
