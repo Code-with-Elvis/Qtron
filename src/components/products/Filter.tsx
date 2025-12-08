@@ -58,24 +58,15 @@ const Filter = () => {
   };
 
   const clearFilters = () => {
-    const params = new URLSearchParams(searchParams.toString());
-    const searchQuery = params.get("q");
-
-    const newParams = new URLSearchParams();
-    if (searchQuery) {
-      newParams.set("q", searchQuery);
-    }
-
-    router.push(
-      `/products${newParams.toString() ? `?${newParams.toString()}` : ""}`
-    );
+    router.push("/products");
   };
 
   const hasActiveFilters =
     selectedCategories.length > 0 ||
     selectedBrands.length > 0 ||
     searchParams.get("price_min") ||
-    searchParams.get("price_max");
+    searchParams.get("price_max") ||
+    searchParams.get("q");
 
   return (
     <aside className="w-72 sticky top-20 h-fit pr-6 border-r hidden md:block">
