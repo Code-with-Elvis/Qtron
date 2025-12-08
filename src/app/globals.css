@@ -272,7 +272,9 @@
   }
 
   /* ==== Theme-specific article styles === */
-  article.category-card {
+
+  article.category-card,
+  .unique-section {
     background: white;
     color: inherit;
   }
@@ -280,6 +282,15 @@
   .theme-neon article.category-card,
   .theme-qtron article.category-card,
   .theme-carbon article.category-card {
+    background: var(--card);
+    color: var(--card-foreground);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  .theme-neon .unique-section,
+  .theme-qtron .unique-section,
+  .theme-carbon .unique-section {
     background: var(--card);
     color: var(--card-foreground);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
