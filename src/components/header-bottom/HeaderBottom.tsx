@@ -3,10 +3,10 @@ import CategoriesBtn from "./CategoriesBtn";
 
 const HeaderBottom = () => {
   const links = [
-    { name: "Today's Deals", href: "#" },
-    { name: "New Arrivals", href: "#" },
-    { name: "Featured Products", href: "#" },
-    { name: "Best Sellers", href: "#" },
+    { name: "Today's Deals", href: "/products?isDeal=true" },
+    { name: "New Arrivals", href: "/products?sort=latest" },
+    { name: "Featured Products", href: "/products?isFeatured=true" },
+    { name: "Best Sellers", href: "/products?isBestSeller=true" },
     { name: "Browse History", href: "#" },
     { name: "About Us", href: "#" },
   ];
