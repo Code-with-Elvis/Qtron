@@ -10,6 +10,7 @@ import {
 } from "../ui/breadcrumb";
 import Link from "next/link";
 import ProductImage from "./ProductImage";
+import ShortcutBox from "./ShortcutBox";
 
 const MainProductContent = async ({ slug }: { slug: string }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -100,7 +101,7 @@ const MainProductContent = async ({ slug }: { slug: string }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.6fr_2fr_250px] gap-3">
         <ProductImage images={product.images} />
         <article className="bg-blue-300">Details</article>
-        <aside className="bg-green-200 hidden lg:block">Sidebar</aside>
+        <ShortcutBox product={product} />
       </div>
     </div>
   );
