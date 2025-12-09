@@ -309,7 +309,7 @@
 
   /* ==== Skeleton Loader === */
   .skeleton {
-    @apply overflow-hidden relative select-none pointer-events-none bg-[#f7f9fa];
+    @apply overflow-hidden relative select-none pointer-events-none bg-[#e9e8e8];
   }
 
   .theme-neon .skeleton,

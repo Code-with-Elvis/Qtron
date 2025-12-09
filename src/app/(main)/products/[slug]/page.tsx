@@ -1,4 +1,5 @@
 import BestSellingProducts from "@/components/single-product/BestSellingProducts";
+import Loading from "@/components/single-product/Loading";
 import MainProductContent from "@/components/single-product/MainProductContent";
 import RelatedProducts from "@/components/single-product/RelatedProducts";
 import { Suspense } from "react";
@@ -12,10 +13,10 @@ const ProductPage = async ({
   return (
     <section>
       <MainProductContent slug={slug} />
-      <Suspense fallback={<div>Loading best-selling products...</div>}>
+      <Suspense fallback={<Loading />}>
         <BestSellingProducts slug={slug} />
       </Suspense>
-      <Suspense fallback={<div>Loading related products...</div>}>
+      <Suspense fallback={<Loading />}>
         <RelatedProducts slug={slug} />
       </Suspense>
     </section>
