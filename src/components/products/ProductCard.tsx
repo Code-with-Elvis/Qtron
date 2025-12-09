@@ -1,6 +1,7 @@
 import { Product } from "@/lib/types/data";
 import Image from "next/image";
 import Link from "next/link";
+import Price from "@/components/global/Price";
 
 function ProductCard({ product }: { product: Product }) {
   const discount =
@@ -35,11 +36,12 @@ function ProductCard({ product }: { product: Product }) {
           {product.name}
         </h3>
         <div className="flex max-[360px]:flex-col items-center max-[360px]:items-start max-[360px]:gap-1 gap-2 mb-2">
-          <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
+          <Price amount={product.price} className="font-bold" />
           {product.listPrice && product.listPrice > product.price && (
-            <span className="text-sm text-muted-foreground line-through">
-              ${product.listPrice.toFixed(2)}
-            </span>
+            <Price
+              amount={product.listPrice}
+              className="text-sm text-muted-foreground line-through"
+            />
           )}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { initializeExchangeRates } from "@/lib/currency";
 
 interface LocationState {
   country: string;
@@ -24,8 +25,11 @@ export const useLocationStore = create<LocationState>((set) => ({
   longitude: null,
   isLoading: true,
   error: null,
-  setLocation: (country, city, latitude, longitude) =>
-    set({ country, city, latitude, longitude, isLoading: false, error: null }),
+  setLocation: (country, city, latitude, longitude) => {
+    set({ country, city, latitude, longitude, isLoading: false, error: null });
+    // --- Initialize exchange rates when location is set ---
+    initializeExchangeRates();
+  },
   setLoading: (isLoading) => set({ isLoading }),
   setError: (error) => set({ error, isLoading: false }),
 }));

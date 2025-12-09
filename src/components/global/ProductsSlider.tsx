@@ -13,6 +13,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Button } from "../ui/button";
+import Price from "./Price";
 
 const ProductsSlider = ({ products }: { products: Product[] }) => {
   const [isBeginning, setIsBeginning] = useState(true);
@@ -115,18 +116,17 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
               </div>
 
               {/* Product Info */}
-              <div className="p-4">
+              <div className="py-4 px-2">
                 <h3 className="font-medium text-sm line-clamp-3 mb-2 group-hover/product:text-primary transition-colors">
                   {product.name}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-lg font-bold">
-                    ${product.price.toFixed(2)}
-                  </span>
+                  <Price amount={product.price} className=" font-bold" />
                   {product.listPrice && product.listPrice > product.price && (
-                    <span className="text-sm text-gray-500 line-through">
-                      ${product.listPrice.toFixed(2)}
-                    </span>
+                    <Price
+                      amount={product.listPrice}
+                      className="text-sm text-gray-500 line-through"
+                    />
                   )}
                 </div>
               </div>
