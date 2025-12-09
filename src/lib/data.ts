@@ -489,11 +489,11 @@ export const footerLinks = [
       },
       {
         label: "Careers",
-        href: "/careers",
+        href: "/about/careers",
       },
       {
         label: "Locations",
-        href: "/locations",
+        href: "/about/locations",
       },
       {
         label: "Blog",
@@ -547,7 +547,7 @@ export const footerLinks = [
       },
       {
         label: "FAQs",
-        href: "/faqs",
+        href: "/about/faq",
       },
     ],
   },
