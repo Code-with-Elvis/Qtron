@@ -15,7 +15,7 @@ const DealsResults = async () => {
   } catch (error) {
     console.error("Error fetching deals:", error);
     return (
-      <div className="text-center text-red-500 mt-16">
+      <div className="text-center text-red-500 mt-4">
         <AlertTriangle className="inline size-9 animate-pulse text-yellow-400  mb-4" />
         <p>An error occurred while fetching deals.</p>
       </div>
