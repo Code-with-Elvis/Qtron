@@ -485,23 +485,23 @@ export const footerLinks = [
     content: [
       {
         label: "About Us",
-        href: "#",
+        href: "/about",
       },
       {
         label: "Careers",
-        href: "#",
+        href: "/careers",
       },
       {
         label: "Locations",
-        href: "#",
+        href: "/locations",
       },
       {
         label: "Blog",
-        href: "#",
+        href: "/blog",
       },
       {
         label: "Customer Reviews",
-        href: "#",
+        href: "/customer-reviews",
       },
     ],
   },
@@ -510,19 +510,19 @@ export const footerLinks = [
     content: [
       {
         label: "Sell on Qtron",
-        href: "#",
+        href: "/sell-on-qtron",
       },
       {
         label: "Affiliate Program",
-        href: "#",
+        href: "/affiliate-program",
       },
       {
         label: "Advertise Your Products",
-        href: "#",
+        href: "/advertise",
       },
       {
         label: "Participate in Research",
-        href: "#",
+        href: "/research",
       },
     ],
   },
@@ -531,23 +531,23 @@ export const footerLinks = [
     content: [
       {
         label: "Contact Us",
-        href: "#",
+        href: "/contact",
       },
       {
         label: "Order Tracking",
-        href: "#",
+        href: "/order-tracking",
       },
       {
         label: "Returns",
-        href: "#",
+        href: "/returns",
       },
       {
         label: "Shipping",
-        href: "#",
+        href: "/shipping",
       },
       {
         label: "FAQs",
-        href: "#",
+        href: "/faqs",
       },
     ],
   },
@@ -557,23 +557,23 @@ export const footerLinks = [
     content: [
       {
         label: "Privacy Policy",
-        href: "#",
+        href: "/privacy-policy",
       },
       {
         label: "Terms of Service",
-        href: "#",
+        href: "/terms",
       },
       {
         label: "Cookie Policy",
-        href: "#",
+        href: "/cookie-policy",
       },
       {
         label: "Payment Methods",
-        href: "#",
+        href: "/payment-methods",
       },
       {
         label: "Sitemap",
-        href: "#",
+        href: "/sitemap",
       },
     ],
   },
