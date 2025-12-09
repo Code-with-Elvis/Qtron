@@ -22,7 +22,7 @@ const ProductImage = ({ images }: { images: string[] }) => {
   };
 
   return (
-    <article className="flex flex-col md:flex-row items-start gap-2">
+    <article className="flex flex-col md:sticky md:top-5  md:flex-row items-start gap-2">
       {/* == Thumbnails == */}
       <div className="flex md:flex-col gap-1.5 order-2 md:order-1">
         {images.map((imgUrl, index) => (

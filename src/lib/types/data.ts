@@ -36,7 +36,7 @@ export type Product = {
   freeShipping?: boolean;
   deliveryEstimate?: string;
   keywords?: string[];
-  features?: { name: string; value: string }[];
+  features?: string[];
   ratingsAverage?: number;
   ratingCount?: number;
   updatedAt: string;

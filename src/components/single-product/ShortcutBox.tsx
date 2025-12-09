@@ -34,7 +34,7 @@ const ShortcutBox = ({ product }: { product: Product }) => {
     : 0;
 
   return (
-    <aside className="border p-4 space-y-4">
+    <aside className="border sticky top-5 p-4 space-y-4 hidden lg:block">
       <Price amount={product.price} className="text-xl font-bold" />
 
       {/* Shipping Note */}
