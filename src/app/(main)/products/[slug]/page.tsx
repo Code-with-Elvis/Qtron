@@ -1,4 +1,6 @@
 import MainProductContent from "@/components/single-product/MainProductContent";
+import RelatedProducts from "@/components/single-product/RelatedProducts";
+import { Suspense } from "react";
 
 const ProductPage = async ({
   params,
@@ -9,6 +11,9 @@ const ProductPage = async ({
   return (
     <section>
       <MainProductContent slug={slug} />
+      <Suspense fallback={<div>Loading related products...</div>}>
+        <RelatedProducts slug={slug} />
+      </Suspense>
     </section>
   );
 };
