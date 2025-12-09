@@ -6,7 +6,9 @@ import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 
 const ProductImage = ({ images }: { images: string[] }) => {
-  const [activeImage, setActiveImage] = useState(images[0]);
+  const [activeImage, setActiveImage] = useState(
+    images[0] || "/placeholder-product.png"
+  );
   const [showZoom, setShowZoom] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const imageRef = useRef<HTMLDivElement>(null);
@@ -22,7 +24,7 @@ const ProductImage = ({ images }: { images: string[] }) => {
   };
 
   return (
-    <article className="flex flex-col md:sticky md:top-5  md:flex-row items-start gap-2">
+    <article className="flex flex-col md:sticky md:top-5 md:flex-row items-start gap-2 relative z-10">
       {/* == Thumbnails == */}
       <div className="flex md:flex-col gap-1.5 order-2 md:order-1">
         {images.map((imgUrl, index) => (
@@ -37,7 +39,7 @@ const ProductImage = ({ images }: { images: string[] }) => {
             onClick={() => setActiveImage(imgUrl)}
           >
             <Image
-              src={imgUrl}
+              src={imgUrl || "/placeholder-product.png"}
               alt={`Product thumbnail ${index + 1}`}
               width={80}
               height={80}
@@ -58,7 +60,7 @@ const ProductImage = ({ images }: { images: string[] }) => {
         >
           <Zoom>
             <Image
-              src={activeImage || "/placeholder-product.png"}
+              src={activeImage}
               alt="Main product image"
               width={600}
               height={600}
