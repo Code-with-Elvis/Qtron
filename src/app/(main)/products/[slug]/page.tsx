@@ -1,3 +1,4 @@
+import BrowseHistory from "@/components/home/BrowseHistory";
 import BestSellingProducts from "@/components/single-product/BestSellingProducts";
 import Loading from "@/components/single-product/Loading";
 import MainProductContent from "@/components/single-product/MainProductContent";
@@ -19,6 +20,8 @@ const ProductPage = async ({
       <Suspense fallback={<Loading />}>
         <RelatedProducts slug={slug} />
       </Suspense>
+      <BrowseHistory />
+      <div className="mt-4"></div>
     </section>
   );
 };

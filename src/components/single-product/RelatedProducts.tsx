@@ -22,11 +22,11 @@ const RelatedProducts = async ({ slug }: { slug: string }) => {
     }
 
     return (
-      <section className="mt-4 mb-5">
+      <section className="mt-4">
         <div className="qtron-container">
           <div className="unique-section p-4">
             <h2 className="mb-2 text-lg font-bold">
-              Products related to this item
+              Products Related to this Item
             </h2>
             <ProductsSlider products={relatedProducts} />
           </div>
@@ -37,7 +37,7 @@ const RelatedProducts = async ({ slug }: { slug: string }) => {
     console.error("Error fetching featured products:", error);
 
     return (
-      <section className="mt-4 mb-5">
+      <section className="mt-4">
         <div className="qtron-container">
           <div className="unique-section p-4">
             <div className="text-center text-red-500 mt-4">
