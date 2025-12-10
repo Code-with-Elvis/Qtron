@@ -17,6 +17,7 @@ import { FaStar } from "react-icons/fa";
 import ColorVariants from "./ColorVariants";
 import AddToCartButton from "./AddToCartButton";
 import ProductDescription from "./ProductDescription";
+import BrowsingHistoryTracker from "../history/BrowsingHistoryTracker";
 
 const MainProductContent = async ({ slug }: { slug: string }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -76,6 +77,9 @@ const MainProductContent = async ({ slug }: { slug: string }) => {
 
   return (
     <div className="qtron-container py-4">
+      {/* Browsing History Tracker */}
+      <BrowsingHistoryTracker productSlug={slug} />
+
       <header className="mb-4">
         <Breadcrumb>
           <BreadcrumbList className="gap-1!">

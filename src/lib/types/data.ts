@@ -42,3 +42,20 @@ export type Product = {
   updatedAt: string;
   createdAt: string;
 };
+
+export type BrowsingHistoryProduct = {
+  _id: string;
+  name: string;
+  slug: string;
+  price: number;
+  listPrice?: number;
+  images: string[];
+  brand: string;
+  category: string[];
+  subCategory: string[];
+  ratingsAverage: number;
+  ratingCount: number;
+  isBestSeller: boolean;
+  isDeal: boolean;
+  freeShipping: boolean;
+};
