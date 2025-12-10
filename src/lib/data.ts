@@ -557,15 +557,15 @@ export const footerLinks = [
     content: [
       {
         label: "Privacy Policy",
-        href: "/privacy-policy",
+        href: "/us/privacy-policy",
       },
       {
         label: "Terms of Service",
-        href: "/terms",
+        href: "/us/terms",
       },
       {
         label: "Cookie Policy",
-        href: "/cookie-policy",
+        href: "/us/cookie-policy",
       },
       {
         label: "Payment Methods",
