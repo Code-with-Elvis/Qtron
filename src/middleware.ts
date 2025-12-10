@@ -28,7 +28,11 @@ export default withAuth(
     }
 
     // === Profile/account routes - require authentication ===
-    if (path.startsWith("/profile") || path.startsWith("/orders")) {
+    if (
+      path.startsWith("/profile") ||
+      path.startsWith("/orders") ||
+      path.startsWith("/history")
+    ) {
       if (!token) {
         return NextResponse.redirect(new URL("/signin", req.url));
       }
@@ -75,6 +79,7 @@ export const config = {
     "/profile/:path*",
     "/orders/:path*",
     "/checkout/:path*",
+    "/history/:path*",
     "/signin",
     "/signup",
   ],

@@ -7,8 +7,8 @@ const HeaderBottom = () => {
     { name: "New Arrivals", href: "/products?sort=latest" },
     { name: "Featured Products", href: "/products?isFeatured=true" },
     { name: "Best Sellers", href: "/products?isBestSeller=true" },
-    { name: "Browse History", href: "#" },
-    { name: "About Us", href: "#" },
+    { name: "Browse History", href: "/history" },
+    { name: "About Us", href: "/about" },
   ];
   return (
     <header>
