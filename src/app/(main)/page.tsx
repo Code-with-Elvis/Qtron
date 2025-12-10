@@ -1,5 +1,6 @@
 import BestSelling from "@/components/home/BestSelling";
 import Brands from "@/components/home/Brands";
+import BrowseHistory from "@/components/home/BrowseHistory";
 import CategoryMarquee from "@/components/home/CategoryMarquee";
 import Deals from "@/components/home/Deals";
 import ExploreSubcategories from "@/components/home/ExploreSubcategories";
@@ -17,6 +18,7 @@ const HomePage = () => {
       <BestSelling />
       <Deals />
       <Brands />
+      <BrowseHistory />
       <CategoryMarquee />
     </section>
   );
