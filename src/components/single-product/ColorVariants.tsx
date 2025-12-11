@@ -30,6 +30,9 @@ const colorMap: Record<string, string> = {
   Maroon: "#7F1D1D",
   Olive: "#65A30D",
   Cyan: "#06B6D4",
+  Magenta: "#D946EF",
+  "Stainless Steel": "#C0C0C0",
+  "Carbon Gray": "#4B5563",
 };
 
 const ColorVariants = ({ colors }: ColorVariantsProps) => {
