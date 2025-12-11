@@ -58,6 +58,63 @@ export const productSchema = z.object({
   features: z.array(z.string()).optional(),
 });
 
+export const editProductSchema = z.object({
+  name: z.string().min(3, "Name must be at least 3 characters long"),
+  brand: z.string().min(2, "Brand must be at least 2 characters long"),
+  description: z
+    .string()
+    .min(10, "Description must be at least 10 characters long"),
+  category: z.array(z.string()).min(1, "At least one category is required"),
+  subCategory: z
+    .array(z.string())
+    .min(1, "At least one subcategory is required"),
+  price: z
+    .string()
+    .min(1, "Price is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return !isNaN(num) && num > 0;
+      },
+      {
+        message: "Price must be a positive number",
+      }
+    ),
+  listPrice: z
+    .string()
+    .min(1, "List price is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return !isNaN(num) && num > 0;
+      },
+      {
+        message: "List price must be a positive number",
+      }
+    ),
+  countInStock: z
+    .string()
+    .min(1, "Stock count is required")
+    .refine(
+      (val) => {
+        const num = Number(val);
+        return Number.isInteger(num) && num >= 0;
+      },
+      {
+        message: "Count in stock must be a non-negative integer",
+      }
+    ),
+  colors: z.array(z.string()).min(1, "At least one color is required"),
+  isPublished: z.boolean(),
+  isFeatured: z.boolean().optional(),
+  isBestSeller: z.boolean().optional(),
+  isDeal: z.boolean().optional(),
+  freeShipping: z.boolean().optional(),
+  deliveryEstimate: z.string().optional(),
+  keywords: z.array(z.string()).optional(),
+  features: z.array(z.string()).optional(),
+});
+
 export const userRegisterSchema = z
   .object({
     name: z

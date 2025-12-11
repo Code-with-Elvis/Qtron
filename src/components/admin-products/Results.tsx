@@ -127,7 +127,7 @@ const Results = async ({ searchParams }: ResultsProps) => {
                     {/* Actions buttons or links can be added here */}
                     <div className="flex items-center gap-2">
                       <Button asChild variant="outline" size="icon-sm">
-                        <Link href={`/admin/products/edit/${product._id}`}>
+                        <Link href={`/admin/products/edit/${product.slug}`}>
                           <Edit />
                         </Link>
                       </Button>
