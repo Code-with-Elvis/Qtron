@@ -4,10 +4,10 @@ import { IconMoodEmptyFilled } from "@tabler/icons-react";
 import { AlertTriangle, Edit, Plus, View } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import Pagination from "../global/Pagination";
 import SearchForm from "./SearchForm";
 import { headers } from "next/headers";
+import DeleteProductButton from "./DeleteProductButton";
 
 const Results = async ({ searchParams }: ResultsProps) => {
   try {
@@ -143,9 +143,7 @@ const Results = async ({ searchParams }: ResultsProps) => {
                           <View className="size-4 mr-1" />
                         </Link>
                       </Button>
-                      <Button variant="outline" size="icon-sm">
-                        <RiDeleteBin5Line />
-                      </Button>
+                      <DeleteProductButton productSlug={product.slug} />
                     </div>
                   </td>
                 </tr>
