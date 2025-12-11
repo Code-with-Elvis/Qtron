@@ -4,6 +4,7 @@ import Product from "@/lib/modals/productModal";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
 import { editProductSchema } from "@/lib/validationSchemas";
+import { deleteUploadThingFiles } from "@/lib/deleteUploadThingFiles";
 
 // === GET /api/products/[slug] - Get single product by slug ===
 export async function GET(
@@ -191,6 +192,86 @@ export async function PUT(
       {
         success: false,
         message: "Failed to update product",
+        error: error instanceof Error ? error.message : "Unknown error",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// === DELETE /api/products/[slug] - Delete product by slug ===
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    await connectToDB();
+
+    const { slug } = await params;
+
+    if (!slug) {
+      return NextResponse.json(
+        { success: false, message: "Product slug is required" },
+        { status: 400 }
+      );
+    }
+
+    // -- Check authentication --
+    const session = await getServerSession(authOptions);
+    if (!session || !session.user) {
+      return NextResponse.json(
+        { success: false, message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
+    // -- Find product --
+    const product = await Product.findOne({ slug });
+
+    if (!product) {
+      return NextResponse.json(
+        { success: false, message: "Product not found" },
+        { status: 404 }
+      );
+    }
+
+    // -- Check ownership (only owner or admin can delete) --
+    const isOwner = session.user.id === product.userId.toString();
+    const isAdmin = session.user.role === "admin";
+
+    if (!isOwner && !isAdmin) {
+      return NextResponse.json(
+        { success: false, message: "Forbidden: You don't own this product" },
+        { status: 403 }
+      );
+    }
+
+    // -- Store images for deletion --
+    const imagesToDelete = product.images || [];
+
+    // -- Delete product from database --
+    await Product.findOneAndDelete({ slug });
+
+    // -- Delete images from UploadThing in background --
+    if (imagesToDelete.length > 0) {
+      deleteUploadThingFiles(imagesToDelete).catch((error) => {
+        console.error("Error deleting images from UploadThing:", error);
+      });
+    }
+
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Product deleted successfully",
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Failed to delete product",
         error: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }
