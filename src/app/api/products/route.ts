@@ -100,6 +100,9 @@ export async function GET(req: NextRequest) {
   try {
     await connectToDB();
 
+    // -- Get session to check user role and ownership --
+    const session = await getServerSession(authOptions);
+
     const { searchParams } = new URL(req.url);
 
     // -- Pagination parameters --
@@ -199,6 +202,27 @@ export async function GET(req: NextRequest) {
     // -- Boolean filters --
     if (isPublished !== null && isPublished !== undefined) {
       filter.isPublished = isPublished === "true";
+    } else {
+      // -- If no explicit isPublished filter, apply access control --
+      // Only show unpublished products to admins or owners
+      const isAdmin = session?.user?.role === "admin";
+      const userId = session?.user?.id;
+
+      if (!isAdmin) {
+        // Non-admins can only see:
+        // 1. Published products, OR
+        // 2. Their own unpublished products
+        if (userId) {
+          filter.$or = [
+            { isPublished: true },
+            { isPublished: false, userId: userId },
+          ];
+        } else {
+          // Not logged in - only show published products
+          filter.isPublished = true;
+        }
+      }
+      // Admins see all products (no filter added)
     }
 
     if (isFeatured !== null && isFeatured !== undefined) {

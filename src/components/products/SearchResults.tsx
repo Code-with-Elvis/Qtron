@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import { SortSelect } from "./SortSelect";
 import { Pagination } from "./PaginationControls";
 import SmallScreenFilter from "./SmallScreenFilter";
+import { headers } from "next/headers";
 
 interface SearchResultsProps {
   searchParams?: Promise<{
@@ -46,8 +47,15 @@ const SearchResults = async ({ searchParams }: SearchResultsProps) => {
     if (params?.page) urlParams.set("page", params.page);
     urlParams.set("limit", params?.limit || "20");
 
+    const headersList = await headers();
+    const cookie = headersList.get("cookie") || "";
+
     const res = await fetch(`${baseUrl}/api/products?${urlParams.toString()}`, {
       cache: "no-store",
+      credentials: "include",
+      headers: {
+        Cookie: cookie,
+      },
     });
 
     const data: {

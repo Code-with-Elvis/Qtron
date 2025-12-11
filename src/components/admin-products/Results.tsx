@@ -7,6 +7,7 @@ import Link from "next/link";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Pagination from "../global/Pagination";
 import SearchForm from "./SearchForm";
+import { headers } from "next/headers";
 
 const Results = async ({ searchParams }: ResultsProps) => {
   try {
@@ -20,9 +21,15 @@ const Results = async ({ searchParams }: ResultsProps) => {
       : 15;
     const query = `q=${encodeURIComponent(search)}&page=${page}&limit=${limit}`;
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const headersList = await headers();
+    const cookie = headersList.get("cookie") || "";
 
     const res = await fetch(`${baseUrl}/api/products?${query}`, {
       cache: "no-store",
+      credentials: "include",
+      headers: {
+        Cookie: cookie,
+      },
     });
 
     if (!res.ok) {

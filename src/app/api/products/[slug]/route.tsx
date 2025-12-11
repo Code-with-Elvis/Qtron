@@ -22,8 +22,11 @@ export async function GET(
       );
     }
 
+    // -- Get session to check if user is owner or admin --
+    const session = await getServerSession(authOptions);
+
     // -- Find product by slug --
-    const product = await Product.findOne({ slug, isPublished: true }).lean();
+    const product = await Product.findOne({ slug }).lean();
 
     if (!product) {
       return NextResponse.json(
@@ -31,6 +34,29 @@ export async function GET(
         { status: 404 }
       );
     }
+
+    // -- Check access permissions --
+    // If product is unpublished, only allow owner or admin
+    if (!product.isPublished) {
+      if (!session) {
+        // No session means not logged in - deny access to unpublished products
+        return NextResponse.json(
+          { success: false, message: "Product not found" },
+          { status: 404 }
+        );
+      }
+
+      const isOwner = session.user?.id === product.userId.toString();
+      const isAdmin = session.user?.role === "admin";
+
+      if (!isOwner && !isAdmin) {
+        return NextResponse.json(
+          { success: false, message: "Product not found" },
+          { status: 404 }
+        );
+      }
+    }
+    // If product is published, allow anyone to view it
 
     return NextResponse.json(
       {

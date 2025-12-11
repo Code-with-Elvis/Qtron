@@ -1,6 +1,7 @@
 import { Product } from "@/lib/types/data";
 import { AlertTriangle } from "lucide-react";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,8 +22,15 @@ import BrowsingHistoryTracker from "../history/BrowsingHistoryTracker";
 
 const MainProductContent = async ({ slug }: { slug: string }) => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const headersList = await headers();
+  const cookie = headersList.get("cookie") || "";
+
   const res = await fetch(`${baseUrl}/api/products/${slug}`, {
     cache: "no-store",
+    credentials: "include",
+    headers: {
+      Cookie: cookie,
+    },
   });
 
   // ----------- HANDLE KNOWN ERRORS -----------
