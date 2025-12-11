@@ -11,6 +11,7 @@ interface ColorVariantsProps {
 // === Map color names to hex/tailwind colors for visual display ===
 const colorMap: Record<string, string> = {
   Black: "#000000",
+  "Titanium Black": "#1F2937",
   White: "#FFFFFF",
   "Glacier White": "#F9FAFB",
   Red: "#EF4444",
