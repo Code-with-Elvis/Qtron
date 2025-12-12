@@ -200,3 +200,7 @@ export const reviewSchema = z.object({
     .max(2000, "Comment cannot exceed 2000 characters"),
   images: z.array(z.string()).optional(),
 });
+
+export const confirmPasswordSchema = z.object({
+  password: z.string().min(6, "Password must be at least 6 characters long"),
+});
