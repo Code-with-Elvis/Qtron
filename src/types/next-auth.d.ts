@@ -8,6 +8,7 @@ declare module "next-auth" {
     name: string;
     role: string;
     photo?: string;
+    phone?: string;
     isVerified: boolean;
   }
 
@@ -18,6 +19,7 @@ declare module "next-auth" {
       name: string;
       role: string;
       photo?: string;
+      phone?: string;
       isVerified: boolean;
     };
   }
@@ -27,6 +29,8 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     role: string;
+    photo?: string;
+    phone?: string;
     isVerified: boolean;
   }
 }
