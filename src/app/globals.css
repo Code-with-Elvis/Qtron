@@ -282,19 +282,21 @@
   .theme-neon article.category-card,
   .theme-qtron article.category-card,
   .theme-carbon article.category-card {
-    background: var(--card);
+    background: oklch(from var(--card) calc(l + 0.03) c h);
     color: var(--card-foreground);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    border: 1px solid oklch(from var(--border) calc(l + 0.05) c h);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+      0 2px 4px -1px rgba(0, 0, 0, 0.3);
   }
 
   .theme-neon .unique-section,
   .theme-qtron .unique-section,
   .theme-carbon .unique-section {
-    background: var(--card);
+    background: oklch(from var(--card) calc(l + 0.03) c h);
     color: var(--card-foreground);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    border: 1px solid oklch(from var(--border) calc(l + 0.05) c h);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+      0 2px 4px -1px rgba(0, 0, 0, 0.3);
   }
 
   /* ==== Marquee Animation === */
