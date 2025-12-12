@@ -5,8 +5,6 @@ const browsingHistorySchema = new mongoose.Schema(
     userId: {
       type: String,
       required: true,
-      unique: true,
-      index: true,
     },
     products: [
       {
@@ -21,7 +19,7 @@ const browsingHistorySchema = new mongoose.Schema(
 );
 
 // Index for faster queries
-browsingHistorySchema.index({ userId: 1 });
+browsingHistorySchema.index({ userId: 1 }, { unique: true });
 browsingHistorySchema.index({ updatedAt: -1 });
 
 const BrowsingHistory =

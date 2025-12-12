@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const userId = searchParams.get("userId");
+    const excludeSlug = searchParams.get("excludeSlug");
 
     if (!userId) {
       return NextResponse.json(
@@ -34,9 +35,15 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // -- Filter out null products (deleted or unpublished) --
+    // -- Filter out null products (deleted or unpublished) and excluded slug --
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const validProducts = history.products.filter((p: any) => p !== null);
+    let validProducts = history.products.filter((p: any) => p !== null);
+
+    // -- Exclude current product if excludeSlug is provided --
+    if (excludeSlug) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      validProducts = validProducts.filter((p: any) => p.slug !== excludeSlug);
+    }
 
     return NextResponse.json({
       products: validProducts,
@@ -75,31 +82,25 @@ export async function POST(req: NextRequest) {
 
     const productId = product._id;
 
-    // -- Find user's browsing history --
-    let history = await BrowsingHistory.findOne({ userId });
+    // -- Check if history exists --
+    const existingHistory = await BrowsingHistory.findOne({ userId });
 
-    if (!history) {
-      // Create new browsing history
-      history = await BrowsingHistory.create({
+    if (!existingHistory) {
+      // Create new history document
+      await BrowsingHistory.create({
         userId,
         products: [productId],
       });
     } else {
-      // -- Remove product if it already exists (to move it to the front) --
-      history.products = history.products.filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (id: any) => id.toString() !== productId.toString()
+      // Remove product if it exists, add to front, and limit to 24
+      const filteredProducts = existingHistory.products.filter(
+        (id: string) => id.toString() !== productId.toString()
       );
 
-      // -- Add product to the beginning of the array --
-      history.products.unshift(productId);
+      const updatedProducts = [productId, ...filteredProducts].slice(0, 24);
 
-      // Keep only the last 24 items
-      if (history.products.length > 24) {
-        history.products = history.products.slice(0, 24);
-      }
-
-      await history.save();
+      existingHistory.products = updatedProducts;
+      await existingHistory.save();
     }
 
     return NextResponse.json({
