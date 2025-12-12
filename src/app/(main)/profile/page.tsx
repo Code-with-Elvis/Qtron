@@ -1,4 +1,5 @@
 import AccountForm from "@/components/profile/AccountForm";
+import PasswordForm from "@/components/profile/PasswordForm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ProfilePage = () => {
@@ -20,7 +21,9 @@ const ProfilePage = () => {
           <TabsContent value="account">
             <AccountForm />
           </TabsContent>
-          <TabsContent value="password"></TabsContent>
+          <TabsContent value="password">
+            <PasswordForm />
+          </TabsContent>
           <TabsContent value="danger-zone"></TabsContent>
         </Tabs>
       </div>
