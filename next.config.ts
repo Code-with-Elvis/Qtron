@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
+      // Your existing domains
       {
         protocol: "https",
         hostname: "utfs.io",
@@ -17,6 +18,45 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "vye2wc9mk1.ufs.sh",
       },
+
+      // Unsplash
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
+
+      // Pexels
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+      },
+
+      // Freepik (their CDN serves images from multiple subdomains)
+      {
+        protocol: "https",
+        hostname: "img.freepik.com",
+      },
+      {
+        protocol: "https",
+        hostname: "freepik.com",
+      },
+      // Some Freepik assets load from static locations
+      {
+        protocol: "https",
+        hostname: "static.freepik.com",
+      },
+
+      // Pixabay
+      {
+        protocol: "https",
+        hostname: "cdn.pixabay.com",
+      },
+
+      // Additional domains can be added here
     ],
   },
 };
