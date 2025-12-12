@@ -10,6 +10,7 @@ declare module "next-auth" {
     photo?: string;
     phone?: string;
     isVerified: boolean;
+    active: boolean;
   }
 
   interface Session {
@@ -21,6 +22,7 @@ declare module "next-auth" {
       photo?: string;
       phone?: string;
       isVerified: boolean;
+      active: boolean;
     };
   }
 }
@@ -32,5 +34,6 @@ declare module "next-auth/jwt" {
     photo?: string;
     phone?: string;
     isVerified: boolean;
+    active: boolean;
   }
 }

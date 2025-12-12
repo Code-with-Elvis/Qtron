@@ -57,6 +57,7 @@ export const authOptions: NextAuthOptions = {
             photo: user.photo,
             phone: user.phone,
             isVerified: user.isVerified,
+            active: user.active,
           };
         } catch (error) {
           console.error("Auth error:", error);
@@ -73,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         token.isVerified = user.isVerified;
         token.photo = user.photo;
         token.phone = user.phone;
+        token.active = user.active;
       }
 
       // Refetch user data when session is updated
@@ -83,6 +85,7 @@ export const authOptions: NextAuthOptions = {
           token.photo = updatedUser.photo;
           token.phone = updatedUser.phone;
           token.isVerified = updatedUser.isVerified;
+          token.active = updatedUser.active;
         }
       }
 
@@ -95,6 +98,7 @@ export const authOptions: NextAuthOptions = {
         session.user.isVerified = token.isVerified as boolean;
         session.user.photo = token.photo as string;
         session.user.phone = token.phone as string;
+        session.user.active = token.active as boolean;
       }
       return session;
     },
