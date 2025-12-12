@@ -55,6 +55,7 @@ export const authOptions: NextAuthOptions = {
             name: user.name,
             role: user.role,
             photo: user.photo,
+            phone: user.phone,
             isVerified: user.isVerified,
           };
         } catch (error) {
@@ -65,12 +66,26 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
         token.isVerified = user.isVerified;
+        token.photo = user.photo;
+        token.phone = user.phone;
       }
+
+      // Refetch user data when session is updated
+      if (trigger === "update") {
+        const updatedUser = await User.findById(token.id).select("-password");
+        if (updatedUser) {
+          token.name = updatedUser.name;
+          token.photo = updatedUser.photo;
+          token.phone = updatedUser.phone;
+          token.isVerified = updatedUser.isVerified;
+        }
+      }
+
       return token;
     },
     async session({ session, token }) {
@@ -78,6 +93,8 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id as string;
         session.user.role = token.role as string;
         session.user.isVerified = token.isVerified as boolean;
+        session.user.photo = token.photo as string;
+        session.user.phone = token.phone as string;
       }
       return session;
     },
