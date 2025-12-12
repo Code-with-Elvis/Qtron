@@ -30,7 +30,7 @@ const UserButton = () => {
           alt="Avatar"
           width={28}
           height={28}
-          className="rounded-full border border-border object-cover "
+          className="rounded-full w-8 shrink-0 h-8 border border-border object-cover "
         />
       </Link>
     );
