@@ -65,16 +65,19 @@ const colorMap: Record<string, string> = {
 };
 
 const ColorVariants = ({ colors }: ColorVariantsProps) => {
-  const { selectedColor, setSelectedColor } = useProductOptionsStore();
+  const { setSelectedColor } = useProductOptionsStore();
   const [mounted, setMounted] = useState(false);
+  const [localSelectedColor, setLocalSelectedColor] = useState<string>("");
 
-  // === Set default color on mount if none selected ===
+  // === Set default color on mount and sync with store ===
   useEffect(() => {
     setMounted(true);
-    if (colors.length > 0 && !selectedColor) {
-      setSelectedColor(colors[0]);
+    if (colors.length > 0) {
+      const defaultColor = colors[0];
+      setLocalSelectedColor(defaultColor);
+      setSelectedColor(defaultColor);
     }
-  }, [colors, selectedColor, setSelectedColor]);
+  }, [colors, setSelectedColor]);
 
   if (!mounted) return null;
 
@@ -87,6 +90,11 @@ const ColorVariants = ({ colors }: ColorVariantsProps) => {
     return lightColors.includes(colorName);
   };
 
+  const handleColorSelect = (color: string) => {
+    setLocalSelectedColor(color);
+    setSelectedColor(color);
+  };
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
@@ -94,20 +102,20 @@ const ColorVariants = ({ colors }: ColorVariantsProps) => {
           Color:
         </span>
         <span className="text-sm font-semibold">
-          {selectedColor || colors[0]}
+          {localSelectedColor || colors[0]}
         </span>
       </div>
 
       <div className="flex flex-wrap gap-2">
         {colors.map((color) => {
-          const isSelected = selectedColor === color;
+          const isSelected = localSelectedColor === color;
           const colorValue = getColorValue(color);
           const needsBorder = isLightColor(color);
 
           return (
             <button
               key={color}
-              onClick={() => setSelectedColor(color)}
+              onClick={() => handleColorSelect(color)}
               className={`relative size-8 transition-all ${
                 isSelected
                   ? "ring-2 ring-primary ring-offset-2"
