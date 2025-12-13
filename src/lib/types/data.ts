@@ -59,3 +59,16 @@ export type BrowsingHistoryProduct = {
   isDeal: boolean;
   freeShipping: boolean;
 };
+
+export type User = {
+  _id: string;
+  name: string;
+  email: string;
+  role: "user" | "admin" | "seller";
+  phone: string;
+  active: boolean;
+  isVerified: boolean;
+  photo: string;
+  createdAt: string;
+  updatedAt: string;
+};
