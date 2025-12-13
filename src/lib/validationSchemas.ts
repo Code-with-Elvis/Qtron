@@ -173,6 +173,27 @@ export const userUpdateSchema = z.object({
   //   .optional(),
 });
 
+export const adminUserUpdateSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .regex(
+      /^[A-Za-z]{2,}\s[A-Za-z]{2,}$/,
+      "Full name must contain exactly two names"
+    ),
+  email: z
+    .email("Please provide a valid email address")
+    .optional()
+    .or(z.literal("")),
+  phone: z
+    .string()
+    .regex(/^\+?[1-9]\d{1,14}$/, "Please provide a valid phone number")
+    .optional()
+    .or(z.literal("")),
+  image: z.url("Image must be a valid URL").optional().or(z.literal("")),
+  role: z.enum(["user", "admin", "seller"], "Invalid role").optional(),
+});
+
 export const changePasswordSchema = z
   .object({
     currentPassword: z
