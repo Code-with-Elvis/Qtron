@@ -518,11 +518,11 @@ export const footerLinks = [
       },
       {
         label: "Advertise Your Products",
-        href: "/advertise",
+        href: "/us/advertise",
       },
       {
         label: "Participate in Research",
-        href: "/research",
+        href: "/us/research",
       },
     ],
   },
