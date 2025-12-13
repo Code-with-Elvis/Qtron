@@ -56,6 +56,16 @@ const nextConfig: NextConfig = {
         hostname: "cdn.pixabay.com",
       },
 
+      // Picsum Photos (for blog images)
+      {
+        protocol: "https",
+        hostname: "fastly.picsum.photos",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+
       // Additional domains can be added here
     ],
   },
