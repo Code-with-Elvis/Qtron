@@ -76,7 +76,7 @@
     "tags": ["Photography", "Smartphone", "Tips", "Mobile"],
     "publishedAt": "2025-01-05",
     "readTime": "7 min read",
-    "featured": false,
+    "featured": true,
     "image": "https://fastly.picsum.photos/id/91/3504/2336.jpg?hmac=tK6z7RReLgUlCuf4flDKeg57o6CUAbgklgLsGL0UowU",
     "content": {
       "layout": "visual-guide",
