@@ -13,38 +13,38 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "../ui/button";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-const DeleteProductButton = ({ productSlug }: { productSlug: string }) => {
+const DeleteProductButton = ({ userId }: { userId: string }) => {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
-      const response = await axios.delete(`/api/products/${productSlug}`);
+      const response = await axios.delete(`/api/admin/users/${userId}`);
       if (response.data.success) {
-        toast.success("Product deleted successfully");
+        toast.success("User deleted successfully");
         router.refresh();
       }
     } catch (error) {
-      console.error("Error deleting product:", error);
+      console.error("Error deleting user:", error);
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
         if (status === 400) {
           toast.error("Validation error: Please check your input.");
         } else if (status === 403) {
           router.push("/");
-          toast.error("You do not have permission to delete this product.");
+          toast.error("You do not have permission to delete this user.");
         } else if (status === 401) {
           router.push("/");
           toast.error("Please sign in to continue.");
         } else {
-          toast.error("Failed to delete product. Please try again.");
+          toast.error("Failed to delete user. Please try again.");
         }
       }
     } finally {
@@ -67,8 +67,8 @@ const DeleteProductButton = ({ productSlug }: { productSlug: string }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete the
-            product from our database.
+            This action cannot be undone. This will permanently delete the user
+            account and remove all associated data.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
