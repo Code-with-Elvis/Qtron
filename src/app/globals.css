@@ -299,6 +299,30 @@
       0 2px 4px -1px rgba(0, 0, 0, 0.3);
   }
 
+  /* ==== Dark theme utility classes === */
+
+  /* Alert backgrounds for light themes */
+  .alert-warning {
+    background: oklch(0.95 0.05 70);
+  }
+
+  .alert-danger {
+    background: oklch(0.95 0.05 10);
+  }
+
+  /* Alert backgrounds for dark themes */
+  .theme-neon .alert-warning,
+  .theme-qtron .alert-warning,
+  .theme-carbon .alert-warning {
+    background: oklch(from var(--muted) calc(l + 0.05) c h);
+  }
+
+  .theme-neon .alert-danger,
+  .theme-qtron .alert-danger,
+  .theme-carbon .alert-danger {
+    background: oklch(from var(--muted) calc(l + 0.05) c h);
+  }
+
   /* ==== Marquee Animation === */
   @keyframes marqueeScroll {
     0% {
