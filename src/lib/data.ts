@@ -543,7 +543,7 @@ export const footerLinks = [
       },
       {
         label: "Shipping",
-        href: "/shipping",
+        href: "/about/shipping",
       },
       {
         label: "FAQs",
@@ -569,7 +569,7 @@ export const footerLinks = [
       },
       {
         label: "Payment Methods",
-        href: "/payment-methods",
+        href: "/about/payment-methods",
       },
       {
         label: "Sitemap",
