@@ -33,7 +33,7 @@ export async function PUT(
       );
     }
 
-    const { name, phone, image, role } = validationResult.data;
+    const { name, phone, image, role, isVerified } = validationResult.data;
 
     // === Check if user exists ===
     const user = await User.findById(id);
@@ -42,11 +42,12 @@ export async function PUT(
     }
 
     // === Build update object (only include fields that are provided) ===
-    const updateData: Record<string, string> = {};
+    const updateData: Record<string, string | boolean> = {};
     if (name !== undefined && name.trim() !== "") updateData.name = name;
     if (phone !== undefined) updateData.phone = phone;
     if (image !== undefined) updateData.photo = image;
     if (role !== undefined && role.trim() !== "") updateData.role = role;
+    if (isVerified !== undefined) updateData.isVerified = isVerified;
 
     // === Update user ===
     const updatedUser = await User.findByIdAndUpdate(
