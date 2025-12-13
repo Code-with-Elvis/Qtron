@@ -181,10 +181,6 @@ export const adminUserUpdateSchema = z.object({
       /^[A-Za-z]{2,}\s[A-Za-z]{2,}$/,
       "Full name must contain exactly two names"
     ),
-  email: z
-    .email("Please provide a valid email address")
-    .optional()
-    .or(z.literal("")),
   phone: z
     .string()
     .regex(/^\+?[1-9]\d{1,14}$/, "Please provide a valid phone number")
@@ -192,6 +188,7 @@ export const adminUserUpdateSchema = z.object({
     .or(z.literal("")),
   image: z.url("Image must be a valid URL").optional().or(z.literal("")),
   role: z.enum(["user", "admin", "seller"], "Invalid role").optional(),
+  isVerified: z.boolean().optional(),
 });
 
 export const changePasswordSchema = z
