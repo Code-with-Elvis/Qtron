@@ -1,21 +1,22 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Package, ShieldCheck, Truck, Users } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-const AboutPage = () => {
+const AboutPage = async () => {
+  const t = await getTranslations("about");
+
   return (
     <>
       {/* Hero Section */}
       <section className="bg-linear-to-br from-primary/10 to-primary/5 py-12">
         <div className="qtron-container">
-          <Badge className="mb-4 rounded py-1">About Qtron</Badge>
+          <Badge className="mb-4 rounded py-1">{t("title")}</Badge>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Your Trusted Electrical Marketplace
+            {t("heroTitle")}
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl">
-            Since our founding, Qtron has been committed to bringing quality
-            products from around the world directly to your doorstep. We believe
-            shopping should be easy, secure, and enjoyable.
+            {t("heroDescription")}
           </p>
         </div>
       </section>
@@ -25,29 +26,15 @@ const AboutPage = () => {
         <div className="qtron-container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Story</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                {t("ourStory")}
+              </h2>
               <div className="space-y-4 text-muted-foreground">
-                <p>
-                  Qtron was created with a simple mission: make high-quality
-                  electronics accessible to everyone, no matter where they are.
-                  What began as a small tech-focused store has evolved into a
-                  trusted destination for buyers who demand performance,
-                  reliability, and value.
-                </p>
+                <p>{t("storyParagraph1")}</p>
 
-                <p>
-                  Today, we offer a curated selection of electronics, from
-                  smartphones and laptops to audio gear, gaming devices, smart
-                  home gadgets, and more. Every category is carefully crafted to
-                  ensure you find the right tech for your lifestyle.
-                </p>
+                <p>{t("storyParagraph2")}</p>
 
-                <p>
-                  We partner with trusted brands and verified sellers to ensure
-                  that every product meets our high standards. Our team works
-                  tirelessly to bring you the best deals, the latest trends, and
-                  exceptional service.
-                </p>
+                <p>{t("storyParagraph3")}</p>
               </div>
             </div>
             <div
@@ -62,7 +49,7 @@ const AboutPage = () => {
       <section className="py-12 bg-muted/30">
         <div className="qtron-container">
           <h2 className=" text-2xl md:text-3xl font-bold mb-6">
-            What We Stand For
+            {t("whatWeStandFor")}
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="rounded">
@@ -73,11 +60,10 @@ const AboutPage = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
-                  Customer First
+                  {t("customerFirst")}
                 </h3>
                 <p className="text-sm text-muted-foreground text-center">
-                  Your satisfaction is our top priority. We listen, adapt, and
-                  continuously improve to serve you better.
+                  {t("customerFirstDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -90,11 +76,10 @@ const AboutPage = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
-                  Trust & Security
+                  {t("trustSecurity")}
                 </h3>
                 <p className="text-sm text-muted-foreground text-center">
-                  Shop with confidence. We use advanced security measures to
-                  protect your data and transactions.
+                  {t("trustSecurityDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -107,11 +92,10 @@ const AboutPage = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
-                  Quality Products
+                  {t("qualityProducts")}
                 </h3>
                 <p className="text-sm text-muted-foreground text-center">
-                  Every product is carefully selected and verified to meet our
-                  high standards of quality.
+                  {t("qualityProductsDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -124,11 +108,10 @@ const AboutPage = () => {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">
-                  Fast Delivery
+                  {t("fastDelivery")}
                 </h3>
                 <p className="text-sm text-muted-foreground text-center">
-                  Get your orders quickly with our efficient logistics network
-                  and reliable shipping partners.
+                  {t("fastDeliveryDesc")}
                 </p>
               </CardContent>
             </Card>
@@ -144,25 +127,25 @@ const AboutPage = () => {
               <p className="text-3xl  md:text-4xl font-bold text-primary mb-2">
                 10M+
               </p>
-              <p className="text-muted-foreground">Happy Customers</p>
+              <p className="text-muted-foreground">{t("happyCustomers")}</p>
             </div>
             <div className="text-center">
               <p className="text-3xl  md:text-4xl font-bold text-primary mb-2">
                 50K+
               </p>
-              <p className="text-muted-foreground">Products Available</p>
+              <p className="text-muted-foreground">{t("productsAvailable")}</p>
             </div>
             <div className="text-center">
               <p className="text-3xl  md:text-4xl font-bold text-primary mb-2">
                 100+
               </p>
-              <p className="text-muted-foreground">Countries Served</p>
+              <p className="text-muted-foreground">{t("countriesServed")}</p>
             </div>
             <div className="text-center">
               <p className="text-3xl  md:text-4xl font-bold text-primary mb-2">
                 24/7
               </p>
-              <p className="text-muted-foreground">Customer Support</p>
+              <p className="text-muted-foreground">{t("customerSupport")}</p>
             </div>
           </div>
         </div>
@@ -171,17 +154,13 @@ const AboutPage = () => {
       {/* Mission Section */}
       <section className="py-16 bg-muted/30">
         <div className="qtron-container">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Our Mission</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            {t("ourMission")}
+          </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            To be the world&#39;s most customer-centric marketplace, where
-            anyone can discover and purchase anything they want online. We
-            strive to make every shopping experience seamless, secure, and
-            satisfying.
+            {t("missionStatement")}
           </p>
-          <p className="text-muted-foreground">
-            Join millions of satisfied customers who trust Qtron for their
-            shopping needs. Experience the difference today.
-          </p>
+          <p className="text-muted-foreground">{t("joinUs")}</p>
         </div>
       </section>
     </>
