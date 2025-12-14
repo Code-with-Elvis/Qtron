@@ -58,7 +58,9 @@ const Filter = () => {
   };
 
   const clearFilters = () => {
-    router.push("/products");
+    const lang = searchParams.get("lang");
+    const url = lang ? `/products?lang=${lang}` : "/products";
+    router.push(url);
   };
 
   const hasActiveFilters =

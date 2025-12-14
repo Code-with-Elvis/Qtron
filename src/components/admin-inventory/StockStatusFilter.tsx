@@ -36,6 +36,11 @@ const StockStatusFilter = () => {
     params.delete("category");
     params.delete("q");
     params.set("page", "1");
+    // Preserve lang param if it exists
+    const lang = searchParams.get("lang");
+    if (lang) {
+      params.set("lang", lang);
+    }
     router.push(`?${params.toString()}`);
   };
 
