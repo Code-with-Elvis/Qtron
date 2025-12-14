@@ -89,6 +89,7 @@ export function NavUser() {
                   <AvatarImage
                     src={user?.photo || "default-profile.png"}
                     alt={user?.name}
+                    className="object-cover"
                   />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
