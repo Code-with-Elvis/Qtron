@@ -82,9 +82,7 @@ const LoginForm = () => {
       <Card className="rounded-sm shadow-none">
         <CardHeader className="gap-1">
           <CardTitle className="text-xl">{t("login")}</CardTitle>
-          <CardDescription>
-            {t("welcomeBack")}
-          </CardDescription>
+          <CardDescription>{t("welcomeBack")}</CardDescription>
         </CardHeader>
         <CardContent>
           {errorMessage && (
