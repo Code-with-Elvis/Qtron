@@ -109,7 +109,7 @@ export function NavUser() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/settings" className="block">
+                <Link href="/profile" className="block">
                   <Settings />
                   Settings
                 </Link>

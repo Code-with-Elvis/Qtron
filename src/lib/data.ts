@@ -618,7 +618,7 @@ export const navItems = [
   },
   {
     title: "Settings",
-    path: "/admin/settings",
+    path: "/profile",
   },
   {
     title: "Analytics",
