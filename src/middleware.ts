@@ -6,24 +6,37 @@ export default withAuth(
     const token = req.nextauth.token;
     const path = req.nextUrl.pathname;
 
+    // Handle locale from URL search params for next-intl
+    const { searchParams } = req.nextUrl;
+    const lang = searchParams.get("lang") || "en";
+
+    const response = NextResponse.next();
+    response.headers.set("x-locale", lang);
+
     // === Redirect authenticated users away from auth pages ===
     if (path === "/signin" || path === "/signup") {
       if (token) {
-        return NextResponse.redirect(new URL("/", req.url));
+        const redirectUrl = new URL("/", req.url);
+        if (lang !== "en") redirectUrl.searchParams.set("lang", lang);
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
     // === Admin routes - only accessible by admin ===
     if (path.startsWith("/admin")) {
       if (token?.role !== "admin") {
-        return NextResponse.redirect(new URL("/", req.url));
+        const redirectUrl = new URL("/", req.url);
+        if (lang !== "en") redirectUrl.searchParams.set("lang", lang);
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
     // === Seller routes - accessible by admin and seller ===
     if (path.startsWith("/seller")) {
       if (token?.role !== "seller" && token?.role !== "admin") {
-        return NextResponse.redirect(new URL("/", req.url));
+        const redirectUrl = new URL("/", req.url);
+        if (lang !== "en") redirectUrl.searchParams.set("lang", lang);
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
@@ -34,11 +47,13 @@ export default withAuth(
       path.startsWith("/history")
     ) {
       if (!token) {
-        return NextResponse.redirect(new URL("/signin", req.url));
+        const redirectUrl = new URL("/signin", req.url);
+        if (lang !== "en") redirectUrl.searchParams.set("lang", lang);
+        return NextResponse.redirect(redirectUrl);
       }
     }
 
-    return NextResponse.next();
+    return response;
   },
   {
     callbacks: {
