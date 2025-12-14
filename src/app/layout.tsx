@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Providers from "./Providers";
 import { Toaster } from "@/components/ui/sonner";
+import IntlProvider from "@/components/IntlProvider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${outfit.variable} antialiased`}>
         <Toaster richColors />
-        <Providers>{children}</Providers>
+        <IntlProvider>
+          <Providers>{children}</Providers>
+        </IntlProvider>
       </body>
     </html>
   );
