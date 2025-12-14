@@ -5,8 +5,10 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SearchForm = () => {
+  const t = useTranslations("common");
   const [searchTerm, setSearchTerm] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -32,7 +34,7 @@ const SearchForm = () => {
       <form onSubmit={handleSubmit} className="relative flex md:hidden">
         <Input
           className="h-10 rounded relative pl-4 pr-15"
-          placeholder="Seach Qtron"
+          placeholder={t("search")}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

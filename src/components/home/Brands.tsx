@@ -1,11 +1,13 @@
 import { featuredBrands } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
-const Brands = () => {
+const Brands = async () => {
+  const t = await getTranslations("home");
   return (
     <div className="qtron-container">
-      <h2 className="mb-2 text-lg font-bold sr-only">Featured Brands</h2>
+      <h2 className="mb-2 text-lg font-bold sr-only">{t("featuredBrands")}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
         {/* Brands Grid */}
         {featuredBrands.map((brand) => (

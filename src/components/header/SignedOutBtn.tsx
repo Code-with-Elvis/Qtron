@@ -2,8 +2,10 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const SignedOutBtn = () => {
+  const t = useTranslations("common");
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
@@ -23,9 +25,11 @@ const SignedOutBtn = () => {
     >
       <div className="flex flex-col gap-0.5">
         <span className="text-sm text-muted-foreground leading-none">
-          Hello, sign in
+          {t("helloSignIn")}
         </span>
-        <span className="font-semibold leading-none">Account & Orders</span>
+        <span className="font-semibold leading-none">
+          {t("accountAndOrders")}
+        </span>
       </div>
     </Link>
   );

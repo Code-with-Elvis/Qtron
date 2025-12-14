@@ -6,10 +6,68 @@ import Link from "next/link";
 import Logo from "@/assets/Logo";
 import ThemeBox from "./ThemeBox";
 import LanguageBox from "./LanguageBox";
+import { useTranslations } from "next-intl";
+
+type FooterTitleKey =
+  | "aboutQtron"
+  | "makeMoney"
+  | "customerService"
+  | "extraInfo";
+type FooterLinkKey =
+  | "aboutUs"
+  | "careers"
+  | "locations"
+  | "blog"
+  | "customerReviews"
+  | "sellOnQtron"
+  | "affiliateProgram"
+  | "advertise"
+  | "research"
+  | "contactUs"
+  | "orderTracking"
+  | "returns"
+  | "shipping"
+  | "faqs"
+  | "privacyPolicy"
+  | "termsOfService"
+  | "cookiePolicy"
+  | "paymentMethods"
+  | "sitemap";
 
 const Footer = () => {
+  const t = useTranslations("footer");
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Translation key mapping for footer links
+  const titleKeys: Record<string, string> = {
+    "About Qtron": "aboutQtron",
+    "Make Money with Us": "makeMoney",
+    "Customer Service": "customerService",
+    "Extra Information": "extraInfo",
+  };
+
+  const linkKeys: Record<string, string> = {
+    "About Us": "aboutUs",
+    Careers: "careers",
+    Locations: "locations",
+    Blog: "blog",
+    "Customer Reviews": "customerReviews",
+    "Sell on Qtron": "sellOnQtron",
+    "Affiliate Program": "affiliateProgram",
+    "Advertise Your Products": "advertise",
+    "Participate in Research": "research",
+    "Contact Us": "contactUs",
+    "Order Tracking": "orderTracking",
+    Returns: "returns",
+    Shipping: "shipping",
+    FAQs: "faqs",
+    "Privacy Policy": "privacyPolicy",
+    "Terms of Service": "termsOfService",
+    "Cookie Policy": "cookiePolicy",
+    "Payment Methods": "paymentMethods",
+    Sitemap: "sitemap",
   };
 
   return (
@@ -20,13 +78,18 @@ const Footer = () => {
         size="lg"
         className="bg-accent w-full rounded-none hover:bg-accent/90"
       >
-        <div className="qtron-container">Back to top</div>
+        <div className="qtron-container">{t("backToTop")}</div>
       </Button>
       {/* ---- Footer Main section ---- */}
       <section className="py-5 bg-[#222] text-white">
         <div className="qtron-container grid grid-cols-2 sm:grid-cols-4 gap-5">
           <nav>
-            <h3 className="text-lg font-bold mb-1">{footerLinks[0].title}</h3>
+            <h3 className="text-lg font-bold mb-1">
+              {t(
+                (titleKeys[footerLinks[0].title] ||
+                  "aboutQtron") as FooterTitleKey
+              )}
+            </h3>
             <ul>
               {footerLinks[0].content.map((link) => (
                 <li key={link.label}>
@@ -34,14 +97,19 @@ const Footer = () => {
                     href={link.href}
                     className="inline-block text-neutral-200 w-full py-1 text-sm hover:underline"
                   >
-                    {link.label}
+                    {t((linkKeys[link.label] || "aboutUs") as FooterLinkKey)}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
           <nav className="hidden sm:block">
-            <h3 className="text-lg font-bold mb-1">{footerLinks[1].title}</h3>
+            <h3 className="text-lg font-bold mb-1">
+              {t(
+                (titleKeys[footerLinks[1].title] ||
+                  "makeMoney") as FooterTitleKey
+              )}
+            </h3>
             <ul>
               {footerLinks[1].content.map((link) => (
                 <li key={link.label}>
@@ -49,14 +117,19 @@ const Footer = () => {
                     href={link.href}
                     className="inline-block text-neutral-200 w-full py-1 text-sm hover:underline"
                   >
-                    {link.label}
+                    {t((linkKeys[link.label] || "aboutUs") as FooterLinkKey)}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
           <nav>
-            <h3 className="text-lg font-bold mb-1">{footerLinks[2].title}</h3>
+            <h3 className="text-lg font-bold mb-1">
+              {t(
+                (titleKeys[footerLinks[2].title] ||
+                  "customerService") as FooterTitleKey
+              )}
+            </h3>
             <ul>
               {footerLinks[2].content.map((link) => (
                 <li key={link.label}>
@@ -64,14 +137,19 @@ const Footer = () => {
                     href={link.href}
                     className="inline-block text-neutral-200 w-full py-1 text-sm hover:underline"
                   >
-                    {link.label}
+                    {t((linkKeys[link.label] || "aboutUs") as FooterLinkKey)}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
           <nav className="hidden sm:block">
-            <h3 className="text-lg font-bold mb-1">{footerLinks[3].title}</h3>
+            <h3 className="text-lg font-bold mb-1">
+              {t(
+                (titleKeys[footerLinks[3].title] ||
+                  "extraInfo") as FooterTitleKey
+              )}
+            </h3>
             <ul>
               {footerLinks[3].content.map((link) => (
                 <li key={link.label}>
@@ -79,7 +157,7 @@ const Footer = () => {
                     href={link.href}
                     className="inline-block text-neutral-200 w-full py-1 text-sm hover:underline"
                   >
-                    {link.label}
+                    {t((linkKeys[link.label] || "aboutUs") as FooterLinkKey)}
                   </Link>
                 </li>
               ))}
@@ -105,7 +183,9 @@ const Footer = () => {
       {/* ---- Footer Bottom section ---- */}
       <section className="bg-[#111] text-neutral-400 text-sm">
         <div className="qtron-container py-4 flex items-center justify-center ">
-          <span>© {new Date().getFullYear()} Qtron. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} Qtron. {t("allRightsReserved")}.
+          </span>
         </div>
       </section>
     </footer>

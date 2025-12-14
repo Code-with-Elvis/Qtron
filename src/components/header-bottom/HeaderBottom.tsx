@@ -1,14 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import CategoriesBtn from "./CategoriesBtn";
+import { useTranslations } from "next-intl";
 
 const HeaderBottom = () => {
+  const t = useTranslations("nav");
   const links = [
-    { name: "Today's Deals", href: "/products?isDeal=true" },
-    { name: "New Arrivals", href: "/products?sort=latest" },
-    { name: "Featured Products", href: "/products?isFeatured=true" },
-    { name: "Best Sellers", href: "/products?isBestSeller=true" },
-    { name: "Browse History", href: "/history" },
-    { name: "About Us", href: "/about" },
+    { name: t("todaysDeals"), href: "/products?isDeal=true" },
+    { name: t("newArrivals"), href: "/products?sort=latest" },
+    { name: t("featuredProducts"), href: "/products?isFeatured=true" },
+    { name: t("bestSellers"), href: "/products?isBestSeller=true" },
+    { name: t("browseHistory"), href: "/history" },
+    { name: t("aboutUs"), href: "/about" },
   ];
   return (
     <header>

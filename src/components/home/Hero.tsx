@@ -10,8 +10,10 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const Hero = () => {
+  const t = useTranslations("home");
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -45,14 +47,11 @@ const Hero = () => {
               <article className="bg-primary/14 h-80 rounded overflow-hidden grid grid-cols-1 sm:grid-cols-[1.5fr_2fr]">
                 <div className="flex flex-col justify-center px-4 py-10 sm:py-0 ">
                   <h1 className="font-extrabold text-xl mb-1">
-                    20% OFF ON FIRST ORDER
+                    {t("heroTitle1")}
                   </h1>
-                  <p className="text-sm">
-                    Offer valid for new customers only. Use code FIRST20 at
-                    checkout.
-                  </p>
+                  <p className="text-sm">{t("heroDesc1")}</p>
                   <Button className="mt-4 w-max" size="lg">
-                    <Link href="/products?isDeal=true">Shop Now</Link>
+                    <Link href="/products?isDeal=true">{t("shopNow")}</Link>
                   </Button>
                 </div>
                 <div>
@@ -80,12 +79,9 @@ const Hero = () => {
                 />
                 <div className="px-4 pb-5">
                   <h2 className="font-extrabold text-xl mb-1">
-                    Bring Home a Big Screen for Less
+                    {t("heroTitle2")}
                   </h2>
-                  <p className="text-sm">
-                    Turn your living room into a home theater with our latest
-                    deals on big screen TVs.
-                  </p>
+                  <p className="text-sm">{t("heroDesc2")}</p>
                 </div>
               </Link>
             </CarouselItem>

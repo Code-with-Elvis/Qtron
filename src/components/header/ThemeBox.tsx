@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { IoCaretDownSharp } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +14,7 @@ import {
 import { themes } from "@/lib/data";
 
 const Theme = () => {
+  const t = useTranslations("common");
   const { theme, setTheme } = useTheme();
 
   const applyTheme = (id: string) => {
@@ -33,7 +35,7 @@ const Theme = () => {
       <DropdownMenuTrigger className="hidden md:flex  items-center gap-1 h-12.5 shrink-0 px-1.5 border-transparent hover:border-border border rounded transition-all duration-100 ease-in-out">
         <div className="flex flex-col items-start gap-0.5 justify-center">
           <span className="text-sm inline-block text-muted-foreground leading-none">
-            Theme:
+            {t("theme")}:
           </span>
           <div className="flex items-center gap-1">
             <span className="font-semibold leading-none">
@@ -45,7 +47,7 @@ const Theme = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56 max-[1280px]:mr-4">
-        <DropdownMenuLabel>Choose Theme</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("chooseTheme")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         {themes.map((t) => (

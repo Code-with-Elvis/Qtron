@@ -25,8 +25,10 @@ import Link from "next/link";
 import SheetTheme from "./SheetTheme";
 import SheetLanguageBox from "./SheetLanguageBox";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslations } from "next-intl";
 
 const CategoriesBtn = () => {
+  const t = useTranslations("common");
   const { user, isAuthenticated } = useAuth();
 
   return (
@@ -49,9 +51,9 @@ const CategoriesBtn = () => {
             <div className="flex items-center gap-2">
               <CgProfile className="size-7.5" />
               <span className="text-xl font-semibold">
-                Hello,{" "}
+                {t("hello")},{" "}
                 <span className=" first-letter:uppercase">
-                  {isAuthenticated ? user?.name : "Sign in"}
+                  {isAuthenticated ? user?.name : t("signIn")}
                 </span>
               </span>
             </div>
@@ -62,14 +64,14 @@ const CategoriesBtn = () => {
                 className="rounded bg-accent absolute -right-10 sm:-right-12 top-4 size-8 sm:size-9"
               >
                 <LiaTimesSolid className="size-5 sm:size-8" />
-                <span className="sr-only">Close</span>
+                <span className="sr-only">{t("close")}</span>
               </Button>
             </SheetClose>
           </header>
         </SheetHeader>
         {/* Categories List */}
         <div className="flex-1 overflow-y-auto pb-3">
-          <h2 className="font-bold text-lg px-6 py-4">Shop By Category</h2>
+          <h2 className="font-bold text-lg px-6 py-4">{t("shopByCategory")}</h2>
           <Accordion type="single" collapsible className="w-full">
             {categories.map((category, index) => (
               <AccordionItem

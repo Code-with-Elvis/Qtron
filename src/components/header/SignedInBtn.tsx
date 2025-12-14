@@ -14,15 +14,21 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
 import { Loader } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 const SignedInBtn = () => {
+  const t = useTranslations("common");
   const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const searchParams = useSearchParams();
 
   const handleSignOut = async () => {
     try {
       setIsSigningOut(true);
-      await signOut({ callbackUrl: "/" });
+      const lang = searchParams.get("lang");
+      const callbackUrl = lang ? `/?lang=${lang}` : "/";
+      await signOut({ callbackUrl });
     } catch (error) {
       console.error("Sign out error:", error);
     } finally {
@@ -43,17 +49,18 @@ const SignedInBtn = () => {
         <button className="cursor-pointer h-12.5 shrink-0 px-1.5 border-transparent hover:border-border border rounded hidden md:flex items-center gap-1 transition-all duration-100 ease-in-out">
           <div className="flex items-start flex-col gap-0.5">
             <span className="text-sm text-muted-foreground leading-none capitalize truncate">
-              Hello, {user?.name || "User"}
+              {t("hello")}, {user?.name || t("user")}
             </span>
             <span className="font-semibold leading-none flex items-center gap-1">
-              Account & Orders <IoCaretDownSharp className="size-3 mt-1" />
+              {t("accountAndOrders")}{" "}
+              <IoCaretDownSharp className="size-3 mt-1" />
             </span>
           </div>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-60 rounded">
         <DropdownMenuLabel>
-          <h4>{user?.name || "User"}</h4>
+          <h4>{user?.name || t("user")}</h4>
           <p className="text-muted-foreground font-normal truncate">
             {user?.email || "user@example.com"}
           </p>
@@ -61,18 +68,18 @@ const SignedInBtn = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/profile" className="inline-block w-full">
-            Your Account
+            {t("yourAccount")}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild className="cursor-pointer">
           <Link href="/orders" className="inline-block w-full">
-            Your Orders
+            {t("yourOrders")}
           </Link>
         </DropdownMenuItem>
         {isAdmin && (
           <DropdownMenuItem asChild className="cursor-pointer">
             <Link href="/admin" className="inline-block w-full">
-              Admin Panel
+              {t("adminPanel")}
             </Link>
           </DropdownMenuItem>
         )}
@@ -87,7 +94,7 @@ const SignedInBtn = () => {
               <Loader className="size-4 animate-spin" />
             </span>
           ) : (
-            "Sign Out"
+            t("signOut")
           )}
         </DropdownMenuItem>
       </DropdownMenuContent>

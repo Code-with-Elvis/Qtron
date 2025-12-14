@@ -11,8 +11,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { themes } from "@/lib/data";
+import { useTranslations } from "next-intl";
 
 const Theme = () => {
+  const t = useTranslations("common");
   const { theme, setTheme } = useTheme();
 
   const applyTheme = (id: string) => {
@@ -33,7 +35,7 @@ const Theme = () => {
       <DropdownMenuTrigger className="flex  items-center gap-1 h-10 shrink-0 px-1.5  border-neutral-700 hover:border-border border rounded transition-all duration-100 ease-in-out">
         <div className="flex items-start gap-2 justify-center">
           <span className="text-sm inline-block text-neutral-300 leading-none">
-            Theme:
+            {t("theme")}:
           </span>
           <div className="flex items-center gap-1">
             <span className="font-semibold leading-none">
@@ -45,7 +47,7 @@ const Theme = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56 max-[1280px]:mr-4">
-        <DropdownMenuLabel>Choose Theme</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("chooseTheme")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         {themes.map((t) => (

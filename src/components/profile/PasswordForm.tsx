@@ -19,11 +19,12 @@ import { Button } from "../ui/button";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Loader } from "lucide-react";
 
 const PasswordForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isUpdating, setIsUpdating] = useState(false);
   const {
     register,
@@ -40,7 +41,9 @@ const PasswordForm = () => {
       if (res.data.success) {
         toast.success("Password updated successfully! Logging out...");
         // Sign out the user after password update
-        await signOut({ redirect: true, callbackUrl: "/signin" });
+        const lang = searchParams.get("lang");
+        const callbackUrl = lang ? `/signin?lang=${lang}` : "/signin";
+        await signOut({ redirect: true, callbackUrl });
       }
     } catch (error) {
       console.error("Error updating password:", error);
@@ -52,10 +55,14 @@ const PasswordForm = () => {
               "Validation error. Please check your input."
           );
         } else if (status === 403) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("You do not have permission to perform this action.");
         } else if (status === 401) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("Please sign in to continue.");
         } else {
           toast.error(

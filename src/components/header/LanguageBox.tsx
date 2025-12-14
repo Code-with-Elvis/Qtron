@@ -14,8 +14,10 @@ import Image from "next/image";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoCaretDownSharp } from "react-icons/io5";
+import { useTranslations } from "next-intl";
 
 const LanguageBox = () => {
+  const t = useTranslations("common");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -40,8 +42,9 @@ const LanguageBox = () => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("lang", selected.code);
 
-      // Navigate with updated params
+      // Navigate with updated params and refresh to pick up new locale
       router.push(`${pathname}?${params.toString()}`);
+      router.refresh();
     }
   };
 
@@ -63,7 +66,7 @@ const LanguageBox = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("selectLanguage")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuRadioGroup
           value={language.name}

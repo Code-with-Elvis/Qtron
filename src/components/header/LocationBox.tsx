@@ -3,8 +3,10 @@
 import { MapPin } from "lucide-react";
 import { useEffect } from "react";
 import { useLocationStore } from "@/store/useLocationStore";
+import { useTranslations } from "next-intl";
 
 const LocationBox = () => {
+  const t = useTranslations("common");
   const { country, city, isLoading, setLocation, setLoading, setError } =
     useLocationStore();
 
@@ -68,7 +70,7 @@ const LocationBox = () => {
       <MapPin className="size-5" />
       <div className="flex flex-col gap-0">
         <span className="text-sm text-muted-foreground leading-tight">
-          Deliver to
+          {t("deliverTo")}
         </span>
         <p className="font-semibold leading-none">
           {isLoading ? "Loading..." : `${city}, ${country}`}

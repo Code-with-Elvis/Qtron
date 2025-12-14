@@ -89,13 +89,7 @@ export default withAuth(
 
 export const config = {
   matcher: [
-    "/admin/:path*",
-    "/seller/:path*",
-    "/profile/:path*",
-    "/orders/:path*",
-    "/checkout/:path*",
-    "/history/:path*",
-    "/signin",
-    "/signup",
+    // Match all routes except static files and API routes
+    "/((?!api|_next/static|_next/image|favicon.ico).*)",
   ],
 };

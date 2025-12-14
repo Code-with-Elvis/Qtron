@@ -4,6 +4,7 @@ import "./globals.css";
 import Providers from "./Providers";
 import { Toaster } from "@/components/ui/sonner";
 import IntlProvider from "@/components/IntlProvider";
+import { LangPersistenceProvider } from "@/components/LangPersistenceProvider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -25,7 +26,9 @@ export default function RootLayout({
       <body className={`${outfit.variable} antialiased`}>
         <Toaster richColors />
         <IntlProvider>
-          <Providers>{children}</Providers>
+          <LangPersistenceProvider>
+            <Providers>{children}</Providers>
+          </LangPersistenceProvider>
         </IntlProvider>
       </body>
     </html>

@@ -23,8 +23,11 @@ import {
 } from "@/components/ui/accordion";
 import { categories } from "@/lib/data";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslations } from "next-intl";
 
 const CategoriesBtn = () => {
+  const t = useTranslations("common");
+  const tNav = useTranslations("nav");
   const { user, isAuthenticated, isLoading } = useAuth();
 
   return (
@@ -32,7 +35,7 @@ const CategoriesBtn = () => {
       <SheetTrigger asChild>
         <button className="h-9 border-transparent hover:border-white border px-1.5 rounded hidden md:flex items-center transition-all gap-0.5 duration-100 ease-in-out">
           <BiMenu className="size-7" />
-          All
+          {tNav("all")}
         </button>
       </SheetTrigger>
       <SheetContent
@@ -40,7 +43,7 @@ const CategoriesBtn = () => {
         className="w-74 sm:w-90 gap-0 [&>button]:hidden"
       >
         <SheetHeader className="px-0 py-0">
-          <SheetTitle className="sr-only">Categories</SheetTitle>
+          <SheetTitle className="sr-only">{tNav("categories")}</SheetTitle>
           <SheetDescription className="sr-only">
             Browse through all product categories
           </SheetDescription>
@@ -48,9 +51,9 @@ const CategoriesBtn = () => {
             <div className="flex items-center gap-2">
               <CgProfile className="size-7.5" />
               <span className="text-xl font-semibold">
-                Hello,{" "}
+                {t("hello")},{" "}
                 <span className=" first-letter:uppercase">
-                  {isAuthenticated ? user?.name : "Sign in"}
+                  {isAuthenticated ? user?.name : t("signIn")}
                 </span>
               </span>
             </div>
@@ -61,14 +64,14 @@ const CategoriesBtn = () => {
                 className="rounded bg-accent absolute -right-10 sm:-right-12 top-4 size-8 sm:size-9"
               >
                 <LiaTimesSolid className="size-5 sm:size-8" />
-                <span className="sr-only">Close</span>
+                <span className="sr-only">{t("close")}</span>
               </Button>
             </SheetClose>
           </header>
         </SheetHeader>
         {/* Categories List */}
         <div className="flex-1 overflow-y-auto pb-3">
-          <h2 className="font-bold text-lg px-6 py-4">Shop By Category</h2>
+          <h2 className="font-bold text-lg px-6 py-4">{t("shopByCategory")}</h2>
           <Accordion type="single" collapsible className="w-full">
             {categories.map((category, index) => (
               <AccordionItem
@@ -102,7 +105,7 @@ const CategoriesBtn = () => {
           </Accordion>
         </div>
         <SheetFooter className="px-0 border-t border-border">
-          <h2 className="font-semibold text-lg px-6">Help & Settings</h2>
+          <h2 className="font-semibold text-lg px-6">{tNav("helpSettings")}</h2>
           <nav>
             <Button
               variant="ghost"
@@ -110,7 +113,7 @@ const CategoriesBtn = () => {
               className="justify-start px-6 w-full rounded-none"
             >
               <Link href="/" className="inline-block w-full">
-                Your Accout
+                {t("yourAccount")}
               </Link>
             </Button>
             <Button
@@ -119,7 +122,7 @@ const CategoriesBtn = () => {
               className="justify-start px-6 w-full rounded-none"
             >
               <Link href="/" className="inline-block w-full">
-                Orders
+                {tNav("orders")}
               </Link>
             </Button>
             {!isLoading && !isAuthenticated && (
@@ -129,7 +132,7 @@ const CategoriesBtn = () => {
                 className="justify-start px-6 w-full rounded-none"
               >
                 <Link href="/signin" className="inline-block w-full">
-                  Sign in
+                  {t("signIn")}
                 </Link>
               </Button>
             )}

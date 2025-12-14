@@ -2,7 +2,6 @@
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -17,7 +16,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { confirmPasswordSchema } from "@/lib/validationSchemas";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "../ui/input";
 import { Loader } from "lucide-react";
 import axios from "axios";
@@ -28,6 +27,7 @@ const DeleteAccountBtn = () => {
   const { isLoading: authLoading, isAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
 
   const {
@@ -48,7 +48,9 @@ const DeleteAccountBtn = () => {
 
       // Sign out the user after password update
 
-      await signOut({ redirect: true, callbackUrl: "/signin" });
+      const lang = searchParams.get("lang");
+      const callbackUrl = lang ? `/signin?lang=${lang}` : "/signin";
+      await signOut({ redirect: true, callbackUrl });
     } catch (error) {
       console.error("Error deleting account:", error);
       if (axios.isAxiosError(error)) {
@@ -59,7 +61,9 @@ const DeleteAccountBtn = () => {
               "Validation error. Please check your input."
           );
         } else if (status === 403) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("You do not have permission to perform this action.");
         } else if (status === 401) {
           toast.error(
@@ -85,7 +89,9 @@ const DeleteAccountBtn = () => {
   }
 
   if (!isAuthenticated) {
-    router.push("/signin");
+    const lang = searchParams.get("lang");
+    const redirectUrl = lang ? `/signin?lang=${lang}` : "/signin";
+    router.push(redirectUrl);
     return null;
   }
 

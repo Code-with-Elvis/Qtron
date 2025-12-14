@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { Loader } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
   Card,
@@ -27,6 +27,7 @@ const AccountForm = () => {
   const { user, isLoading, isAuthenticated } = useAuth();
   const { update } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [isUpdating, setIsUpdating] = useState(false);
 
   const {
@@ -68,10 +69,14 @@ const AccountForm = () => {
               "Validation error. Please check your input."
           );
         } else if (status === 403) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("You do not have permission to perform this action.");
         } else if (status === 401) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("Please sign in to continue.");
         } else {
           toast.error("Failed to update account. Please try again later.");
@@ -92,7 +97,9 @@ const AccountForm = () => {
   }
 
   if (!isAuthenticated) {
-    router.push("/login");
+    const lang = searchParams.get("lang");
+    const redirectUrl = lang ? `/login?lang=${lang}` : "/login";
+    router.push(redirectUrl);
     return null;
   }
 

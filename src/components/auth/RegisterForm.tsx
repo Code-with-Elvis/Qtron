@@ -18,14 +18,18 @@ import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const RegisterForm = () => {
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
   const [isPending, setIsPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (errorMessage) {
@@ -51,14 +55,16 @@ const RegisterForm = () => {
       const response = await axios.post("/api/auth/signup", data);
 
       if (response.status === 201) {
-        router.push("/signin");
-        toast.success("Account created successfully! Please sign in.");
+        const lang = searchParams.get("lang");
+        const redirectUrl = lang ? `/signin?lang=${lang}` : "/signin";
+        router.push(redirectUrl);
+        toast.success(t("accountCreatedSuccess"));
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        setErrorMessage(error.response.data.error || "Something went wrong");
+        setErrorMessage(error.response.data.error || t("somethingWentWrong"));
       } else {
-        setErrorMessage("Network error. Please try again.");
+        setErrorMessage(t("somethingWentWrong"));
       }
     } finally {
       setIsPending(false);
@@ -69,8 +75,8 @@ const RegisterForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-[400px]">
       <Card className="rounded-sm shadow-none">
         <CardHeader className="gap-1">
-          <CardTitle className="text-xl">Sign Up</CardTitle>
-          <CardDescription>Create a new account</CardDescription>
+          <CardTitle className="text-xl">{t("signUp")}</CardTitle>
+          <CardDescription>{t("createAccount")}</CardDescription>
         </CardHeader>
         <CardContent>
           {errorMessage && (
@@ -82,7 +88,7 @@ const RegisterForm = () => {
           {/* -- Full name -- */}
           <div className="mb-2">
             <Label htmlFor="fullName" className="text-sm ml-1 mb-1">
-              Full Name
+              {t("fullName")}
             </Label>
             <Input
               type="text"
@@ -102,7 +108,7 @@ const RegisterForm = () => {
           {/* -- Email -- */}
           <div className="mb-2">
             <Label htmlFor="email" className="text-sm ml-1 mb-1">
-              Email
+              {t("email")}
             </Label>
             <Input
               type="email"
@@ -121,7 +127,7 @@ const RegisterForm = () => {
           {/* -- Password -- */}
           <div className="mb-2">
             <Label htmlFor="password" className="text-sm ml-1 mb-1">
-              Password
+              {t("password")}
             </Label>
             <Input
               type="password"
@@ -140,7 +146,7 @@ const RegisterForm = () => {
           {/* -- Confirm Password -- */}
           <div className="mb-2">
             <Label htmlFor="confirmPassword" className="text-sm ml-1 mb-1">
-              Confirm Password
+              {t("confirmPassword")}
             </Label>
             <Input
               type="password"
@@ -167,15 +173,15 @@ const RegisterForm = () => {
             className="w-full"
           >
             {isPending && <Loader className="size-5 animate-spin" />}
-            {isPending ? "Creating Account..." : "Sign Up"}
+            {isPending ? t("creatingAccount") : t("signUp")}
           </Button>
           <p className="text-center text-sm text-muted-foreground font-anek-telugu dark:text-neutral-300">
-            Already have an account?{" "}
+            {t("alreadyHaveAccount")}{" "}
             <Link
               href="/signin"
               className=" dark:text-neutral-200 hover:underline font-semibold transition-all duration-100 ease-in-out"
             >
-              Sign In
+              {tCommon("signIn")}
             </Link>
           </p>
         </CardFooter>

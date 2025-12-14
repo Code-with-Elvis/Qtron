@@ -18,14 +18,18 @@ import { Button } from "../ui/button";
 import { Loader } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const LoginForm = () => {
+  const t = useTranslations("auth");
+  const tCommon = useTranslations("common");
   const [isPending, setIsPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (errorMessage) {
@@ -57,15 +61,17 @@ const LoginForm = () => {
       });
 
       if (result?.error) {
-        setErrorMessage("Invalid email or password");
+        setErrorMessage(t("invalidCredentials"));
       } else if (result?.ok) {
-        router.push("/");
+        const lang = searchParams.get("lang");
+        const redirectUrl = lang ? `/?lang=${lang}` : "/";
+        router.push(redirectUrl);
         router.refresh();
-        toast.success("Logged in successfully!");
+        toast.success(t("loggedInSuccess"));
       }
     } catch (error) {
       console.error(error);
-      setErrorMessage("Something went wrong. Please try again.");
+      setErrorMessage(t("somethingWentWrong"));
     } finally {
       setIsPending(false);
     }
@@ -75,9 +81,9 @@ const LoginForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-[400px]">
       <Card className="rounded-sm shadow-none">
         <CardHeader className="gap-1">
-          <CardTitle className="text-xl">Login</CardTitle>
+          <CardTitle className="text-xl">{t("login")}</CardTitle>
           <CardDescription>
-            Welcome back! Please enter your details to login.
+            {t("welcomeBack")}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -89,7 +95,7 @@ const LoginForm = () => {
           {/* -- Email -- */}
           <div className="mb-2">
             <Label htmlFor="email" className="text-sm ml-1 mb-1">
-              Email
+              {t("email")}
             </Label>
             <Input
               type="email"
@@ -108,7 +114,7 @@ const LoginForm = () => {
           {/* -- Password -- */}
           <div className="mb-2">
             <Label htmlFor="password" className="text-sm ml-1 mb-1">
-              Password
+              {t("password")}
             </Label>
             <Input
               type="password"
@@ -134,15 +140,15 @@ const LoginForm = () => {
             className="w-full"
           >
             {isPending && <Loader className="size-5 animate-spin" />}
-            {isPending ? "Validating..." : "Sign In"}
+            {isPending ? t("validating") : tCommon("signIn")}
           </Button>
           <p className="text-center text-sm text-muted-foreground font-anek-telugu dark:text-neutral-300">
-            Don&apos;t have an account?{" "}
+            {t("dontHaveAccount")}{" "}
             <Link
               href="/signup"
-              className=" dark:text-neutral-200 hover:underline font-semibold transition-all duration-100 ease-in-out"
+              className="dark:text-neutral-200 hover:underline font-semibold transition-all duration-100 ease-in-out"
             >
-              Sign Up
+              {t("signUp")}
             </Link>
           </p>
         </CardFooter>

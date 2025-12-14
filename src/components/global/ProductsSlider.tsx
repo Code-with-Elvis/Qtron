@@ -14,8 +14,10 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Button } from "../ui/button";
 import Price from "./Price";
+import { useTranslations } from "next-intl";
 
 const ProductsSlider = ({ products }: { products: Product[] }) => {
+  const t = useTranslations("common");
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
   const uniqueId = useId();
@@ -110,7 +112,7 @@ const ProductsSlider = ({ products }: { products: Product[] }) => {
                 />
                 {product.isFeatured && (
                   <span className="absolute top-2 left-2 bg-yellow-400 text-black text-xs font-semibold px-2 py-1 rounded">
-                    Featured
+                    {t("featured")}
                   </span>
                 )}
               </div>

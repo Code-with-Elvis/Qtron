@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useTranslations } from "next-intl";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +15,7 @@ import { Button } from "../ui/button";
 import { RxCaretSort } from "react-icons/rx";
 
 const SheetTheme = () => {
+  const t = useTranslations("common");
   const { theme, setTheme } = useTheme();
 
   const applyTheme = (id: string) => {
@@ -37,7 +39,7 @@ const SheetTheme = () => {
           className="flex px-6 justify-between rounded-none gap-1"
         >
           <span className="text-sm inline-block text-muted-foreground leading-none">
-            Theme:
+            {t("theme")}:
           </span>
           <div className="flex items-center gap-1">
             <span className="font-semibold leading-none">
@@ -49,7 +51,7 @@ const SheetTheme = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-56 max-[1280px]:mr-4">
-        <DropdownMenuLabel>Choose Theme</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("chooseTheme")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         {themes.map((t) => (

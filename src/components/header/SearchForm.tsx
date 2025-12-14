@@ -16,8 +16,11 @@ import { useState, useRef, useEffect } from "react";
 import { categories } from "@/lib/data";
 import { IoCaretDownSharp } from "react-icons/io5";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SearchForm = () => {
+  const t = useTranslations("common");
+  const tNav = useTranslations("nav");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [buttonWidth, setButtonWidth] = useState(80);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -69,7 +72,7 @@ const SearchForm = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 rounded">
-          <DropdownMenuLabel>Categories</DropdownMenuLabel>
+          <DropdownMenuLabel>{tNav("categories")}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup
             value={selectedCategory}
@@ -88,7 +91,7 @@ const SearchForm = () => {
       <Input
         className="h-10 rounded relative"
         style={{ paddingLeft: `${buttonWidth + 8}px`, paddingRight: "60px" }}
-        placeholder="Seach Qtron"
+        placeholder={t("search")}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />

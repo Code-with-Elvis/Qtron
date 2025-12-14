@@ -6,6 +6,8 @@ export default getRequestConfig(async () => {
   const headersList = await headers();
   const locale = headersList.get("x-locale") || "en";
 
+  console.log("🌐 Locale detected:", locale);
+
   return {
     locale,
     messages: (await import(`../../messages/${locale}.json`)).default,

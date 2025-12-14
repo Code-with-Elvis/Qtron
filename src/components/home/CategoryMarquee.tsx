@@ -1,19 +1,35 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { getTranslations } from "next-intl/server";
 
-const CategoryMarquee = () => {
-  const categories = [
-    "Headphones",
-    "Speakers",
-    "Watch",
-    "Earbuds",
-    "Mouse",
-    "Keyboard",
-    "Laptop",
-    "Smartphone",
-    "Tablet",
-    "Camera",
-    "Monitor",
+type CategoryKey =
+  | "headphones"
+  | "speakers"
+  | "watch"
+  | "earbuds"
+  | "mouse"
+  | "keyboard"
+  | "laptop"
+  | "smartphone"
+  | "tablet"
+  | "camera"
+  | "monitor";
+
+const CategoryMarquee = async () => {
+  const t = await getTranslations("home");
+
+  const categories: { key: CategoryKey; url: string }[] = [
+    { key: "headphones", url: "/products?subcategory=headphones" },
+    { key: "speakers", url: "/products?subcategory=speakers" },
+    { key: "watch", url: "/products?subcategory=smartwatches" },
+    { key: "earbuds", url: "/products?subcategory=earbuds" },
+    { key: "mouse", url: "/products?subcategory=mice" },
+    { key: "keyboard", url: "/products?subcategory=keyboards" },
+    { key: "laptop", url: "/products?subcategory=laptops" },
+    { key: "smartphone", url: "/products?subcategory=smartphones" },
+    { key: "tablet", url: "/products?q=tablets" },
+    { key: "camera", url: "/products?subcategory=digital-cameras" },
+    { key: "monitor", url: "/products?subcategory=monitors" },
   ];
 
   return (
@@ -34,8 +50,9 @@ const CategoryMarquee = () => {
                 variant="outline"
                 size="sm"
                 className=" bg-slate-100 text-slate-500 text-xs sm:text-sm hover:bg-slate-600 hover:text-white active:scale-95 transition-all duration-300 shrink-0"
+                asChild
               >
-                <Link href="#">{category}</Link>
+                <Link href={category.url}>{t(category.key)}</Link>
               </Button>
             ))
           )}

@@ -16,7 +16,7 @@ import { confirmPasswordSchema } from "@/lib/validationSchemas";
 import { Input } from "../ui/input";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
@@ -25,6 +25,7 @@ import { useSession } from "next-auth/react";
 
 const DeactivationBtn = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { isActive, isLoading: authLoading, isAuthenticated } = useAuth();
   const { update } = useSession();
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +62,9 @@ const DeactivationBtn = () => {
               "Validation error. Please check your input."
           );
         } else if (status === 403) {
-          router.push("/");
+          const lang = searchParams.get("lang");
+          const redirectUrl = lang ? `/?lang=${lang}` : "/";
+          router.push(redirectUrl);
           toast.error("You do not have permission to perform this action.");
         } else if (status === 401) {
           toast.error(
@@ -87,7 +90,9 @@ const DeactivationBtn = () => {
   }
 
   if (!isAuthenticated) {
-    router.push("/signin");
+    const lang = searchParams.get("lang");
+    const redirectUrl = lang ? `/signin?lang=${lang}` : "/signin";
+    router.push(redirectUrl);
     return null;
   }
 

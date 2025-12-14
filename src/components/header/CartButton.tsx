@@ -1,7 +1,12 @@
+"use client";
+
 import Cart from "@/assets/Cart";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 const CartButton = () => {
+  const t = useTranslations("common");
+
   return (
     <Link
       href="/"
@@ -12,7 +17,7 @@ const CartButton = () => {
           0
         </span>
         <Cart className="size-6" />
-        <span className="sr-only">Cart</span>
+        <span className="sr-only">{t("cart")}</span>
       </div>
     </Link>
   );
