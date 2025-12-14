@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { RiSearchLine } from "react-icons/ri";
 import { Button } from "../ui/button";
 import { Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const SearchForm = () => {
+  const t = useTranslations('common');
   const [searchTerm, setSearchTerm] = useState("");
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -43,7 +45,7 @@ const SearchForm = () => {
       <RiSearchLine className="absolute text-xl -translate-y-1/2 pointer-events-none top-1/2 left-4 text-neutral-500 dark:text-neutral-300" />
       <input
         type="text"
-        placeholder="Search inventory..."
+        placeholder={`${t('search')} inventory...`}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full h-9 px-4 pl-12 text-sm rounded-sm font-medium placeholder:text-muted-foreground focus:outline-none focus:border-primary border-border border"
