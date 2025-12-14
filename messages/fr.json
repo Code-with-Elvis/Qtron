@@ -66,7 +66,9 @@
     "dontHaveAccount": "Vous n'avez pas de compte?",
     "alreadyHaveAccount": "Vous avez déjà un compte?",
     "loggedInSuccess": "Connecté avec succès!",
-    "accountCreatedSuccess": "Compte créé avec succès! Veuillez vous connecter."
+    "accountCreatedSuccess": "Compte créé avec succès! Veuillez vous connecter.",
+    "phone": "Numéro de téléphone",
+    "forgotPassword": "Mot de passe oublié?"
   },
   "about": {
     "title": "À Propos de Qtron",
@@ -138,20 +140,7 @@
     "checkout": "Passer à la caisse",
     "continueShopping": "Continuer les achats",
     "remove": "Retirer",
-    "quantity": "Quantité"
-  },
-  "auth": {
-    "email": "Email",
-    "password": "Mot de passe",
-    "confirmPassword": "Confirmer le mot de passe",
-    "fullName": "Nom complet",
-    "phone": "Numéro de téléphone",
-    "forgotPassword": "Mot de passe oublié?",
-    "createAccount": "Créer un compte",
-    "haveAccount": "Vous avez déjà un compte?",
-    "noAccount": "Vous n'avez pas de compte?"
-  },
-  "admin": {
+    "quantity": "Quantité",
     "dashboard": "Tableau de bord",
     "orders": "Commandes",
     "products": "Produits",
